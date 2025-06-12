@@ -1,4 +1,7 @@
 import { Appointment } from "./appointment.entity";
+import { Barber } from "./barber.entity";
+import { OperatingHours } from './operating-hours.entity';
+import { Service } from "./service.entity";
 
 export class Barbershop {
     id: string;
@@ -19,5 +22,8 @@ export class Barbershop {
     contactPhone: string;
     contactEmail: string;
 
+    barbers: Barber[];
+    services: Service[];
+    operatingHours: OperatingHours[];
     appointments: Appointment[];
 }
