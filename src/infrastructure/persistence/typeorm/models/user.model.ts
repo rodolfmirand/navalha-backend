@@ -9,15 +9,15 @@ export class UserModel {
     @Column()
     name: string;
 
-    @Column()
+    @Column({ unique: true })
     email: string;
 
     @Column()
     passwordHash: string;
 
-    @Column({type: 'varchar', length: 20, nullable: true})
+    @Column({ type: 'varchar', length: 20, nullable: true })
     phoneNumber: string;
 
-    @Column({type: 'enum', enum: UserRole, default: UserRole.CLIENT})
+    @Column({ type: 'enum', enum: UserRole, default: UserRole.CLIENT })
     role: UserRole;
 }
