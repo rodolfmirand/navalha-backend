@@ -1,8 +1,6 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm";
-import { BarbershopModel } from "./barbershop.model";
-import { BarberModel } from "./barber.model";
+import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 
-@Entity({ name: 'services' })
+@Entity({name: 'services'})
 export class ServiceModel {
     @PrimaryColumn('uuid')
     id: string;
@@ -13,22 +11,17 @@ export class ServiceModel {
     @Column()
     name: string;
 
-    @Column({ type: 'text', nullable: true })
+    @Column({ type: 'text',nullable: true})
     description?: string;
 
-    @Column({ type: 'integer' })
+    @Column({type: 'integer'})
     priceInCents: number;
 
     @Column()
     durationInMinutes: number;
 
-    @Column({ default: true, type: 'boolean' })
+    @Column({ default: true, type: 'boolean'})
     isActive: boolean;
 
-    @ManyToOne(() => BarbershopModel)
-    @JoinColumn({ name: 'barbershopId' })
-    barbershop: BarbershopModel;
-
-    @ManyToMany(() => BarberModel, (barber) => barber.appointments)
-    barbers: BarberModel[];
+    @ManyToOne(()=> Barber)
 }
