@@ -2,6 +2,8 @@ import { Column, Entity, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { UserModel } from "./user.model";
 import { BarberModel } from "./barber.model";
 import { ServiceModel } from "./service.model";
+import { OperatingHoursModel } from "./operating-hours.model";
+import { AppointmentModel } from "./appointment.model";
 
 @Entity({ name: 'barbershops' })
 export class BarbershopModel {
@@ -34,7 +36,6 @@ export class BarbershopModel {
 
     @Column('uuid')
     ownerId: string;
-
 
     @OneToOne(() => UserModel)
     owner: UserModel;
