@@ -1,6 +1,5 @@
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { UserModel } from "./user.model";
-import { Barbershop } from "src/domain/entities/barbershop.entity";
 import { BarbershopModel } from "./barbershop.model";
 import { ServiceModel } from "./service.model";
 import { AppointmentModel } from "./appointment.model";
