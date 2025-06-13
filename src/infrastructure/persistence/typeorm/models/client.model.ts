@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { UserModel } from "./user.model";
-import { Appointment } from "src/domain/entities/appointment.entity";
+import { AppointmentModel } from "./appointment.model";
 
 @Entity({ name: 'clients' })
 export class ClientModel {
@@ -28,6 +28,6 @@ export class ClientModel {
         };
     };
 
-    @OneToMany(() => Appointment, (appointment) => appointment.clientId)
-    appointments: Appointment[];
+    @OneToMany(() => AppointmentModel, (appointment) => appointment.clientId)
+    appointments: AppointmentModel[];
 }
