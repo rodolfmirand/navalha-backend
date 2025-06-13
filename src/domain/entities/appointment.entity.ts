@@ -11,5 +11,5 @@ export class Appointment {
 
     startTime: Date;
 
-    princeInCents: number;
+    priceInCents: number;
 }
