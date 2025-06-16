@@ -38,7 +38,7 @@ export class AppointmentModel {
 
     @ManyToOne(() => BarbershopModel, (barbershop) => barbershop.appointments)
     @JoinColumn({ name: 'barbershopId' })
-    barbershop: BarberModel;
+    barbershop: BarbershopModel;
 
     @Column('uuid')
     serviceId: string;
