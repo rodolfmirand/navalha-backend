@@ -2,33 +2,33 @@ import { Client } from 'src/domain/entities/client.entity';
 import { ClientModel } from '../typeorm/models/client.model';
 import { AppointmentMapper } from './appointment.mapper';
 export class ClientMapper {
-    static toDomain(clientModel: ClientModel): Client {
-        const clientEntity = new Client();
+    static toDomain(model: ClientModel): Client {
+        const entity = new Client();
 
-        clientEntity.id = clientModel.id;
-        clientEntity.userId = clientModel.userId;
+        entity.id = model.id;
+        entity.userId = model.userId;
 
-        if(clientModel.preferences) {
-            clientEntity.preferences = clientModel.preferences;
+        if(model.preferences) {
+            entity.preferences = model.preferences;
         }
 
-        if(clientModel.appointments){
-            clientEntity.appointments = clientModel.appointments.map((appointmentModel) => AppointmentMapper.toDomain(appointmentModel));
+        if(model.appointments){
+            entity.appointments = model.appointments.map((appointmentModel) => AppointmentMapper.toDomain(appointmentModel));
         }
 
-        return clientEntity;
+        return entity;
     }
 
-    public static toPersistence(clientEntity: Client): ClientModel {
-    const clientModel = new ClientModel();
+    public static toPersistence(entity: Client): ClientModel {
+    const model = new ClientModel();
 
-    clientModel.id = clientEntity.id;
-    clientModel.userId = clientEntity.userId;
+    model.id = entity.id;
+    model.userId = entity.userId;
     
-    if (clientEntity.preferences) {
-      clientModel.preferences = clientEntity.preferences;
+    if (entity.preferences) {
+      model.preferences = entity.preferences;
     }
 
-    return clientModel;
+    return model;
   }
 }

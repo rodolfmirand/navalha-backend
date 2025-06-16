@@ -2,33 +2,33 @@ import { Appointment } from "src/domain/entities/appointment.entity";
 import { AppointmentModel } from "../typeorm/models/appointment.model";
 
 export class AppointmentMapper {
-    public static toDomain(appointmentModel: AppointmentModel): Appointment {
-        const appointmentEntity = new Appointment();
+    public static toDomain(model: AppointmentModel): Appointment {
+        const entity = new Appointment();
 
-        appointmentEntity.id = appointmentModel.id;
-        appointmentEntity.clientId = appointmentModel.clientId;
-        appointmentEntity.barberId = appointmentModel.barberId;
-        appointmentEntity.barbershopId = appointmentModel.barbershopId;
-        appointmentEntity.serviceId = appointmentModel.serviceId;
-        appointmentEntity.status = appointmentModel.status;
-        appointmentEntity.startTime = appointmentModel.startTime;
-        appointmentEntity.priceInCents = appointmentModel.priceInCents;
+        entity.id = model.id;
+        entity.clientId = model.clientId;
+        entity.barberId = model.barberId;
+        entity.barbershopId = model.barbershopId;
+        entity.serviceId = model.serviceId;
+        entity.status = model.status;
+        entity.startTime = model.startTime;
+        entity.priceInCents = model.priceInCents;
 
-        return appointmentEntity;
+        return entity;
     }
 
-    public static toPersistence(appointmentEntity: Appointment): AppointmentModel {
-        const appointmentModel = new AppointmentModel();
+    public static toPersistence(entity: Appointment): AppointmentModel {
+        const model = new AppointmentModel();
 
-        appointmentModel.id = appointmentEntity.id;
-        appointmentModel.clientId = appointmentEntity.clientId;
-        appointmentModel.barberId = appointmentEntity.barberId;
-        appointmentModel.barbershopId = appointmentEntity.barbershopId;
-        appointmentModel.serviceId = appointmentEntity.serviceId;
-        appointmentModel.status = appointmentEntity.status;
-        appointmentModel.startTime = appointmentEntity.startTime;
-        appointmentModel.priceInCents = appointmentEntity.priceInCents;
+        model.id = entity.id;
+        model.clientId = entity.clientId;
+        model.barberId = entity.barberId;
+        model.barbershopId = entity.barbershopId;
+        model.serviceId = entity.serviceId;
+        model.status = entity.status;
+        model.startTime = entity.startTime;
+        model.priceInCents = entity.priceInCents;
 
-        return appointmentModel;
+        return model;
     }
 }

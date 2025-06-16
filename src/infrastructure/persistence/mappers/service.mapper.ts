@@ -2,31 +2,31 @@ import { Service } from "src/domain/entities/service.entity";
 import { ServiceModel } from "../typeorm/models/service.model";
 
 export class ServiceMapper {
-    public static toDomain(serviceModel: ServiceModel): Service {
-        const serviceEntity = new Service();
+    public static toDomain(model: ServiceModel): Service {
+        const entity = new Service();
 
-        serviceEntity.id = serviceModel.id;
-        serviceEntity.barbershopId = serviceModel.barbershopId;
-        serviceEntity.name = serviceModel.name;
-        serviceEntity.description = serviceModel.description;
-        serviceEntity.priceInCents = serviceModel.priceInCents;
-        serviceEntity.durationInMinutes = serviceModel.durationInMinutes;
-        serviceEntity.isActive = serviceModel.isActive;
+        entity.id = model.id;
+        entity.barbershopId = model.barbershopId;
+        entity.name = model.name;
+        entity.description = model.description;
+        entity.priceInCents = model.priceInCents;
+        entity.durationInMinutes = model.durationInMinutes;
+        entity.isActive = model.isActive;
 
-        return serviceEntity;
+        return entity;
     }
 
-    public static toPersistence(serviceEntity: Service): ServiceModel {
-        const serviceModel = new ServiceModel();
+    public static toPersistence(entity: Service): ServiceModel {
+        const model = new ServiceModel();
 
-        serviceModel.id = serviceEntity.id;
-        serviceModel.barbershopId = serviceEntity.barbershopId;
-        serviceModel.name = serviceEntity.name;
-        serviceModel.description = serviceEntity.description;
-        serviceModel.priceInCents = serviceEntity.priceInCents;
-        serviceModel.durationInMinutes = serviceEntity.durationInMinutes;
-        serviceModel.isActive = serviceEntity.isActive;
+        model.id = entity.id;
+        model.barbershopId = entity.barbershopId;
+        model.name = entity.name;
+        model.description = entity.description;
+        model.priceInCents = entity.priceInCents;
+        model.durationInMinutes = entity.durationInMinutes;
+        model.isActive = entity.isActive;
 
-        return serviceModel;
+        return model;
     }
 }
