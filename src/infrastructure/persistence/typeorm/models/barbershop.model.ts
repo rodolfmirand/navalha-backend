@@ -23,7 +23,7 @@ export class BarbershopModel {
     address: {
         street: string;
         city: string;
-        disctric: string;
+        district: string;
         number: string;
         state: string;
     };
