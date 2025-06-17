@@ -1,6 +1,6 @@
 import { Expose, Type } from "class-transformer";
 import { ClientPreferencesResponseDto } from "./client-preferences/client-preferences-response.dto";
-import { AppointmentResponseDto } from "../appointment-response.dto";
+import { AppointmentResponseDto } from "../appointment/appointment-response.dto";
 
 export class ClientResponseDto {
     @Expose()
