@@ -18,6 +18,6 @@ export class UserModel {
     @Column({ type: 'varchar', length: 20, nullable: true })
     phoneNumber: string;
 
-    @Column({ type: 'enum', enum: UserRole, default: UserRole.CLIENT })
+    @Column({ type: 'enum', enum: UserRole, default: UserRole.CUSTOMER })
     role: UserRole;
 }
