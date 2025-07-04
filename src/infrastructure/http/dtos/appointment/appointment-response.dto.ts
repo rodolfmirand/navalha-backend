@@ -15,6 +15,9 @@ export class AppointmentResponseDto {
     readonly priceInCents: number;
 
     @Expose()
+    readonly customerId: string;
+
+    @Expose()
     readonly barberId: string;
 
     @Expose()
