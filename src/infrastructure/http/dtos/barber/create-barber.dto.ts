@@ -1,10 +1,6 @@
-import { IsArray, IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
+import { IsArray, IsOptional, IsString, IsUUID } from "class-validator";
 
 export class CreateBarberDto {
-    @IsString()
-    @IsNotEmpty()
-    readonly name: string;
-
     @IsUUID('4')
     readonly barbershopId: string;
 
