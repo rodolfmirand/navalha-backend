@@ -2,8 +2,8 @@ import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from "
 import { UserModel } from "./user.model";
 import { AppointmentModel } from "./appointment.model";
 
-@Entity({ name: 'clients' })
-export class ClientModel {
+@Entity({ name: 'customers' })
+export class CustomerModel {
     @PrimaryColumn('uuid')
     id: string;
 
@@ -28,6 +28,6 @@ export class ClientModel {
         };
     };
 
-    @OneToMany(() => AppointmentModel, (appointment) => appointment.clientId)
+    @OneToMany(() => AppointmentModel, (appointment) => appointment.customerId)
     appointments: AppointmentModel[];
 }
