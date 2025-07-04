@@ -6,7 +6,7 @@ export class AppointmentMapper {
         const entity = new Appointment();
 
         entity.id = model.id;
-        entity.clientId = model.clientId;
+        entity.customerId = model.customerId;
         entity.barberId = model.barberId;
         entity.barbershopId = model.barbershopId;
         entity.serviceId = model.serviceId;
@@ -21,7 +21,7 @@ export class AppointmentMapper {
         const model = new AppointmentModel();
 
         model.id = entity.id;
-        model.clientId = entity.clientId;
+        model.customerId = entity.customerId;
         model.barberId = entity.barberId;
         model.barbershopId = entity.barbershopId;
         model.serviceId = entity.serviceId;
