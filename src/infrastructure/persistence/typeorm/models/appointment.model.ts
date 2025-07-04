@@ -1,6 +1,6 @@
 import { AppointmentStatus } from "src/domain/enums/appointment-status.enum";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
-import { ClientModel } from "./client.model";
+import { CustomerModel } from "./customer.model";
 import { BarberModel } from "./barber.model";
 import { BarbershopModel } from "./barbershop.model";
 import { ServiceModel } from "./service.model";
@@ -20,11 +20,11 @@ export class AppointmentModel {
     priceInCents: number;
 
     @Column('uuid')
-    clientId: string;
+    customerId: string;
 
-    @ManyToOne(() => ClientModel, (client) => client.appointments)
+    @ManyToOne(() => CustomerModel, (customer) => customer.appointments)
     @JoinColumn({ name: 'clientId' })
-    client: ClientModel;
+    customer: CustomerModel;
 
     @Column('uuid')
     barberId: string;
