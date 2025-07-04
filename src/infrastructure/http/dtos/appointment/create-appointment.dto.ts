@@ -3,7 +3,7 @@ import { IsDate, IsNotEmpty, IsUUID } from "class-validator";
 export class CreateAppointmentDto {
     @IsUUID('4')
     @IsNotEmpty()
-    clientId: string;
+    customerId: string;
 
     @IsUUID('4')
     @IsNotEmpty()
