@@ -1,6 +1,6 @@
 import { Appointment } from "./appointment.entity";
 
-export class Client {
+export class Customer {
     id: string;
     userId: string;
 
