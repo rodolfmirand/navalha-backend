@@ -2,7 +2,7 @@ import { AppointmentStatus } from "../enums/appointment-status.enum";
 
 export class Appointment {
     id: string;
-    clientId: string;
+    customerId: string;
     barberId: string;
     barbershopId: string;
     serviceId: string;
