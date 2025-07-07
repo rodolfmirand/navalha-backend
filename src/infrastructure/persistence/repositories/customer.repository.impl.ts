@@ -1,17 +1,32 @@
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
 import { Customer } from "src/domain/entities/customer.entity";
 import { ICustomerRepository } from "src/domain/repositories/icustomer.repository";
+import { CustomerModel } from "../typeorm/models/customer.model";
+import { Repository } from "typeorm";
+import { CustomerMapper } from "../mappers/customer.mapper";
 
+@Injectable()
 export class CustomerRepositoryImpl implements ICustomerRepository {
-    save(customer: Customer): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    constructor(@InjectRepository(CustomerModel) private readonly repository: Repository<CustomerModel>) { }
+
+    async save(customer: Customer): Promise<void> {
+        const model = CustomerMapper.toPersistence(customer);
+        await this.repository.save(model);
     }
-    findById(id: string): Promise<Customer | null> {
-        throw new Error("Method not implemented.");
+
+    async findById(id: string): Promise<Customer | null> {
+        const model = await this.repository.findOneBy({ id });
+        return model ? CustomerMapper.toDomain(model) : null;
     }
-    findAll(): Promise<Customer[]> {
-        throw new Error("Method not implemented.");
+
+    async findAll(): Promise<Customer[]> {
+        const entities = await this.repository.find();
+        return entities.map(CustomerMapper.toDomain);
     }
-    delete(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async delete(id: string): Promise<void> {
+        await this.repository.delete({ id });
     }
 }
