@@ -2,7 +2,7 @@ import { Customer } from 'src/domain/entities/customer.entity';
 import { CustomerModel } from '../typeorm/models/customer.model';
 import { AppointmentMapper } from './appointment.mapper';
 
-export class customerMapper {
+export class CustomerMapper {
   public static toDomain(model: CustomerModel): Customer {
     const entity = new Customer();
 
