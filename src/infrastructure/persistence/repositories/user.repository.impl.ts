@@ -12,18 +12,18 @@ export class UserRepositoryImpl implements IUserRepository {
     constructor(@InjectRepository(UserModel) private readonly repository: Repository<UserModel>) { }
 
     async save(user: User): Promise<void> {
-        const userModel = UserMapper.toDomain(user);
-        await this.repository.save(userModel);
+        const entity = UserMapper.toDomain(user);
+        await this.repository.save(entity);
     }
 
     async findById(id: string): Promise<User | null> {
-        const userModel = await this.repository.findOneBy({ id });
-        if (userModel == null) return null;
-        return UserMapper.toDomain(userModel);
+        const model = await this.repository.findOneBy({ id });
+        return model ? UserMapper.toDomain(model) : null;
     }
 
     async findAll(): Promise<User[]> {
-        return await this.findAll();
+        const entities = await this.repository.find();
+        return entities.map(UserMapper.toDomain);
     }
 
     async delete(id: string): Promise<void> {
