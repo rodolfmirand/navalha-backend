@@ -37,7 +37,7 @@ export class BarbershopMapper {
         return entity;
     }
 
-    public static toPersisntece(entity: Barbershop): BarbershopModel {
+    public static toPersistence(entity: Barbershop): BarbershopModel {
         const model = new BarbershopModel();
 
         model.id = entity.id;
