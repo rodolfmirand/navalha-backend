@@ -17,13 +17,13 @@ export class ServiceRepositoryImpl implements IServiceRepository {
     }
 
     async findById(id: string): Promise<Service | null> {
-        const entity = await this.repository.findOneBy({ id });
-        return entity ? ServiceMapper.toDomain(entity) : null;
+        const models = await this.repository.findOneBy({ id });
+        return models ? ServiceMapper.toDomain(models) : null;
     }
 
     async findAll(): Promise<Service[]> {
-        const entities = await this.repository.find();
-        return entities.map(ServiceMapper.toDomain);
+        const models = await this.repository.find();
+        return models.map(ServiceMapper.toDomain);
     }
 
     async delete(id: string): Promise<void> {

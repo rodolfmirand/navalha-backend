@@ -17,13 +17,13 @@ export class AppointmentRepositoryImpl implements IAppointmentRepository {
     }
 
     async findById(id: string): Promise<Appointment | null> {
-        const entity = await this.repository.findOneBy({ id });
-        return entity ? AppointmentMapper.toDomain(entity) : null;
+        const model = await this.repository.findOneBy({ id });
+        return model ? AppointmentMapper.toDomain(model) : null;
     }
 
     async findAll(): Promise<Appointment[]> {
-        const entities = await this.repository.find();
-        return entities.map(AppointmentMapper.toDomain);
+        const models = await this.repository.find();
+        return models.map(AppointmentMapper.toDomain);
     }
 
     async delete(id: string): Promise<void> {

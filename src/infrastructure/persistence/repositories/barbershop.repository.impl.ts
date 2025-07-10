@@ -17,13 +17,13 @@ export class BarbershopRepositoryImpl implements IBarbershopRepository {
     }
 
     async findById(id: string): Promise<Barbershop | null> {
-        const entity = await this.repository.findOneBy({ id });
-        return entity ? BarbershopMapper.toDomain(entity) : null;
+        const models = await this.repository.findOneBy({ id });
+        return models ? BarbershopMapper.toDomain(models) : null;
     }
 
     async findAll(): Promise<Barbershop[]> {
-        const entities = await this.repository.find();
-        return entities.map(BarbershopMapper.toDomain);
+        const models = await this.repository.find();
+        return models.map(BarbershopMapper.toDomain);
     }
 
     async delete(id: string): Promise<void> {

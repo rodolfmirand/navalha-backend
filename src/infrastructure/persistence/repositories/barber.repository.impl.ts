@@ -22,8 +22,8 @@ export class BarberRepositoryImpl implements IBarberRepository {
     }
 
     async findAll(): Promise<Barber[]> {
-        const entities = await this.repository.find();
-        return entities.map(BarberMapper.toDomain);
+        const models = await this.repository.find();
+        return models.map(BarberMapper.toDomain);
     }
 
     async delete(id: string): Promise<void> {

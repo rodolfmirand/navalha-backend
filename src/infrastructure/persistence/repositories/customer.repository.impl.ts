@@ -22,8 +22,8 @@ export class CustomerRepositoryImpl implements ICustomerRepository {
     }
 
     async findAll(): Promise<Customer[]> {
-        const entities = await this.repository.find();
-        return entities.map(CustomerMapper.toDomain);
+        const models = await this.repository.find();
+        return models.map(CustomerMapper.toDomain);
     }
 
     async delete(id: string): Promise<void> {

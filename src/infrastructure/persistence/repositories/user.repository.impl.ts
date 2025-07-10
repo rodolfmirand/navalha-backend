@@ -22,8 +22,8 @@ export class UserRepositoryImpl implements IUserRepository {
     }
 
     async findAll(): Promise<User[]> {
-        const entities = await this.repository.find();
-        return entities.map(UserMapper.toDomain);
+        const models = await this.repository.find();
+        return models.map(UserMapper.toDomain);
     }
 
     async delete(id: string): Promise<void> {
