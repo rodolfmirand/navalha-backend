@@ -7,7 +7,7 @@ export class CreateUserService {
 
     constructor(private readonly repository: IUserRepository) { }
 
-    async execute(user: User): Promise<void> {
+    async execute(user: User): Promise<string> {
         const emailInUse = await this.repository.findByEmail(user.email);
         if (emailInUse) {
             throw new Error("E-mail already in use.");
@@ -18,6 +18,7 @@ export class CreateUserService {
             throw new Error("Phone number already in use.")
         }
 
-        await this.repository.save(user);
+        const savedUser = await this.repository.save(user);
+        return savedUser.id;
     }
 }
