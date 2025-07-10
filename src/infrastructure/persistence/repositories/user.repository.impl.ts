@@ -21,6 +21,16 @@ export class UserRepositoryImpl implements IUserRepository {
         return model ? UserMapper.toDomain(model) : null;
     }
 
+    async findByEmail(email: string): Promise<User | null> {
+        const model = await this.repository.findOneBy({ email });
+        return model ? UserMapper.toDomain(model) : null;
+    }
+
+    async findByPhoneNumber(phoneNumber: string): Promise<User | null> {
+        const model = await this.repository.findOneBy({ phoneNumber });
+        return model ? UserMapper.toDomain(model) : null;
+    }
+
     async findAll(): Promise<User[]> {
         const models = await this.repository.find();
         return models.map(UserMapper.toDomain);
