@@ -11,9 +11,10 @@ export class UserRepositoryImpl implements IUserRepository {
 
     constructor(@InjectRepository(UserModel) private readonly repository: Repository<UserModel>) { }
 
-    async save(user: User): Promise<void> {
+    async save(user: User): Promise<User> {
         const entity = UserMapper.toPersistence(user);
-        await this.repository.save(entity);
+        const model = await this.repository.save(entity);
+        return UserMapper.toDomain(model);
     }
 
     async findById(id: string): Promise<User | null> {
