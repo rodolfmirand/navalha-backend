@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsString, IsUUID, MinLength, ValidateNested } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString, IsUUID, MinLength, ValidateNested } from "class-validator";
 import { CustomerPreferencesDto } from "./customer-preferences/customer-preferences.dto";
 import { Type } from "class-transformer";
 
 export class CreateCustomerDto {
     @IsUUID('4')
     @IsNotEmpty()
-    userId: string;
+    readonly userId: string;
 
     @IsString()
     @IsNotEmpty()
@@ -14,5 +14,6 @@ export class CreateCustomerDto {
 
     @ValidateNested()
     @Type(() => CustomerPreferencesDto)
+    @IsOptional()
     readonly preferences?: CustomerPreferencesDto;
 }
