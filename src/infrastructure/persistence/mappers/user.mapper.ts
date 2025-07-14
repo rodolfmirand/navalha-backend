@@ -1,6 +1,7 @@
 import { User } from 'src/domain/entities/user.entity';
 import { UserModel } from '../typeorm/models/user.model';
 import { CreateUserDto } from '../../http/dtos/user/create-user.dto';
+import { UserRespondeDto } from 'src/infrastructure/http/dtos/user/user-responde.dto';
 export class UserMapper {
     public static toDomain(model: UserModel): User {
         const entity = new User();
@@ -38,5 +39,17 @@ export class UserMapper {
         entity.password = dto.password;
 
         return entity;
+    }
+
+    public static toRespondeDTO(user: User) {
+        const dto = new UserRespondeDto();
+
+        dto.id = user.id;
+        dto.name = user.name;
+        dto.email = user.email;
+        dto.phoneNumber = user.phoneNumber;
+        dto.role = user.role;
+
+        return dto;
     }
 }
