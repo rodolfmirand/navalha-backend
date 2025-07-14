@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { IUserRepository } from '../../../../domain/repositories/iuser.repository';
 import { User } from "src/domain/entities/user.entity";
+import { IUserRepository } from "src/domain/repositories/iuser.repository";
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class CreateUserService {
@@ -17,6 +18,11 @@ export class CreateUserService {
         if (phoneNumberInUse) {
             throw new Error("Phone number already in use.")
         }
+
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+
+        user.password = hashedPassword;
 
         const savedUser = await this.repository.save(user);
         return savedUser.id;
