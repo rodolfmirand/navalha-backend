@@ -3,26 +3,26 @@ import { AppointmentStatus } from "src/domain/enums/appointment-status.enum";
 
 export class AppointmentResponseDto {
     @Expose()
-    readonly id: string;
+    id: string;
 
     @Expose()
-    readonly status: AppointmentStatus;
+    status: AppointmentStatus;
 
     @Expose()
-    readonly startTime: Date;
+    startTime: Date;
 
     @Expose()
-    readonly priceInCents: number;
+    priceInCents: number;
 
     @Expose()
-    readonly customerId: string;
+    customerId: string;
 
     @Expose()
-    readonly barberId: string;
+    barberId: string;
 
     @Expose()
-    readonly barbershopId: string;
+    barbershopId: string;
 
     @Expose()
-    readonly serviceId: string;
+    serviceId: string;
 }
