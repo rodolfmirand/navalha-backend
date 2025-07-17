@@ -1,6 +1,8 @@
 import { Customer } from 'src/domain/entities/customer.entity';
 import { CustomerModel } from '../typeorm/models/customer.model';
 import { AppointmentMapper } from './appointment.mapper';
+import { CreateCustomerDto } from 'src/infrastructure/http/dtos/customer/create-customer.dto';
+import { CustomerResponseDto } from 'src/infrastructure/http/dtos/customer/customer-response.dto';
 
 export class CustomerMapper {
   public static toDomain(model: CustomerModel): Customer {
@@ -31,5 +33,27 @@ export class CustomerMapper {
     }
 
     return model;
+  }
+
+  public static fromDTO(dto: CreateCustomerDto): CustomerModel {
+    const entity = new CustomerModel();
+
+    entity.userId = dto.userId;
+
+    if (dto.preferences) {
+      entity.preferences = dto.preferences;
+    }
+
+    return entity;
+  }
+
+  public static toDTO(entity: Customer): CustomerResponseDto {
+    const dto = new CustomerResponseDto();
+
+    dto.id = entity.id;
+    dto.appointments = entity.appointments.map(AppointmentMapper.toDTO);
+    dto.preferences = entity.preferences;
+
+    return dto;
   }
 }
