@@ -11,9 +11,9 @@ export class CustomerRepositoryImpl implements ICustomerRepository {
 
     constructor(@InjectRepository(CustomerModel) private readonly repository: Repository<CustomerModel>) { }
 
-    async save(customer: Customer): Promise<void> {
+    async save(customer: Customer): Promise<Customer> {
         const model = CustomerMapper.toPersistence(customer);
-        await this.repository.save(model);
+        return await this.repository.save(model);
     }
 
     async findById(id: string): Promise<Customer | null> {
