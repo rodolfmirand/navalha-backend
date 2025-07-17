@@ -11,7 +11,7 @@ export class AppointmentModel {
     id: string;
 
     @Column({ type: 'enum', enum: AppointmentStatus, default: AppointmentStatus.SCHEDULED })
-    status = AppointmentStatus;
+    status: AppointmentStatus;
 
     @Column({ type: 'time with time zone' })
     startTime: Date;
