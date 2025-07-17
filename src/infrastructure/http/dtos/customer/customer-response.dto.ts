@@ -4,19 +4,13 @@ import { AppointmentResponseDto } from "../appointment/appointment-response.dto"
 
 export class CustomerResponseDto {
     @Expose()
-    readonly id: string;
-
-    @Expose()
-    readonly name: string;
-
-    @Expose()
-    readonly email: string;
+    id: string;
 
     @Expose()
     @Type(() => CustomerPreferencesResponseDto)
-    readonly preferences?: CustomerPreferencesResponseDto;
+    preferences?: CustomerPreferencesResponseDto;
 
     @Type(() => AppointmentResponseDto)
     @Expose()
-    readonly appointments?: AppointmentResponseDto[];
+    appointments?: AppointmentResponseDto[];
 }
