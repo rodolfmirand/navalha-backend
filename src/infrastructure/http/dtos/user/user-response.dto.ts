@@ -1,6 +1,6 @@
 import { UserRole } from "src/domain/enums/user-role.enum";
 
-export class UserRespondeDto {
+export class UserResponseDTO {
     id: string;
     name: string;
     email: string;
