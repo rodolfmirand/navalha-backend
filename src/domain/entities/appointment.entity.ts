@@ -7,7 +7,7 @@ export class Appointment {
     barbershopId: string;
     serviceId: string;
 
-    status = AppointmentStatus;
+    status: AppointmentStatus;
 
     startTime: Date;
 
