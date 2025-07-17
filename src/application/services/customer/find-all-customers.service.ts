@@ -3,7 +3,7 @@ import { Customer } from "src/domain/entities/customer.entity";
 import { ICustomerRepository } from "src/domain/repositories/icustomer.repository";
 
 @Injectable()
-export class FindAllUsersService {
+export class FindAllCUstomersService {
 
     constructor(private readonly repository: ICustomerRepository) { }
 
