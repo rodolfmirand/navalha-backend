@@ -1,5 +1,6 @@
 import { Appointment } from "src/domain/entities/appointment.entity";
 import { AppointmentModel } from "../typeorm/models/appointment.model";
+import { AppointmentResponseDto } from '../../http/dtos/appointment/appointment-response.dto';
 
 export class AppointmentMapper {
     public static toDomain(model: AppointmentModel): Appointment {
@@ -30,5 +31,20 @@ export class AppointmentMapper {
         model.priceInCents = entity.priceInCents;
 
         return model;
+    }
+
+    public static toDTO(entity: Appointment): AppointmentResponseDto {
+        const dto = new AppointmentResponseDto();
+
+        dto.id = entity.id;
+        dto.customerId = entity.customerId;
+        dto.barberId = entity.barberId;
+        dto.barbershopId = entity.barbershopId;
+        dto.serviceId = entity.serviceId;
+        dto.status = entity.status;
+        dto.startTime = entity.startTime;
+        dto.priceInCents = entity.priceInCents;
+
+        return dto;
     }
 }
