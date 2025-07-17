@@ -7,11 +7,6 @@ export class CreateCustomerDto {
     @IsNotEmpty()
     readonly userId: string;
 
-    @IsString()
-    @IsNotEmpty()
-    @MinLength(10)
-    readonly phoneNumber: string;
-
     @ValidateNested()
     @Type(() => CustomerPreferencesDto)
     @IsOptional()
