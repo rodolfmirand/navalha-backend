@@ -8,12 +8,12 @@ export class CreateCustomerService {
 
     constructor(private readonly customerRepository: ICustomerRepository, private readonly userRepository: IUserRepository) { }
 
-    async execute(customer: Customer): Promise<void> {
+    async execute(customer: Customer): Promise<Customer> {
         const user = await this.userRepository.findById(customer.userId);
-        if(!user) {
+        if (!user) {
             throw new NotFoundException("User not found.");
         }
 
-        await this.customerRepository.save(customer);
+        return await this.customerRepository.save(customer);
     }
 }
