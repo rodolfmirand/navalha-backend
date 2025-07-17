@@ -1,11 +1,12 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { FindAllUsersService } from "src/application/services/customer/find-all-customers.service";
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { FindAllCUstomersService } from "src/application/services/customer/find-all-customers.service";
 import { CreateUserService } from "src/application/services/user/create-user.service";
 import { DeleteUserService } from "src/application/services/user/delete-user.service";
 import { FindUserService } from "src/application/services/user/find-user.service";
 import { CreateUserDto } from "../dtos/user/create-user.dto";
 import { UserMapper } from "src/infrastructure/persistence/mappers/user.mapper";
-import { UserRespondeDto } from "../dtos/user/user-responde.dto";
+import { UserResponseDTO } from "../dtos/user/user-response.dto";
+import { FindAllUsersService } from "src/application/services/user/find-all-users.service";
 
 @Controller('user')
 export class UserController {
@@ -17,14 +18,26 @@ export class UserController {
     ) { }
 
     @Post()
-    async create(@Body() dto: CreateUserDto): Promise<void> {
+    async create(@Body() dto: CreateUserDto): Promise<UserResponseDTO> {
         const user = UserMapper.fromDTO(dto);
-        await this.createUser.execute(user);
+        const savedUser = await this.createUser.execute(user);
+        return UserMapper.toDTO(savedUser);
     }
 
     @Get(':id')
-    async find(@Param('id') id: string): Promise<UserRespondeDto> {
+    async find(@Param('id') id: string): Promise<UserResponseDTO> {
         const user = await this.findUser.execute(id);
-        return UserMapper.toRespondeDTO(user);
+        return UserMapper.toDTO(user);
+    }
+
+    @Get()
+    async findAll(): Promise<UserResponseDTO[]> {
+        const users = await this.findAllUsers.execute();
+        return users.map(UserMapper.toDTO);
+    }
+
+    @Delete(':id')
+    async delete(@Param('id') id: string): Promise<void> {
+        await this.deleteUser.execute(id);
     }
 }
