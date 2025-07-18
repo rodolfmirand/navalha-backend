@@ -1,5 +1,7 @@
 import { Service } from "src/domain/entities/service.entity";
 import { ServiceModel } from "../typeorm/models/service.model";
+import { CreateServiceDto } from "src/infrastructure/http/dtos/service/create-service.dto";
+import { ServiceResponseDto } from "src/infrastructure/http/dtos/service/service-response.dto";
 
 export class ServiceMapper {
     public static toDomain(model: ServiceModel): Service {
@@ -28,5 +30,32 @@ export class ServiceMapper {
         model.isActive = entity.isActive;
 
         return model;
+    }
+
+    public static fromDTO(dto: CreateServiceDto): Service {
+        const entity = new Service();
+
+        entity.barbershopId = dto.barbershopId;
+        entity.name = dto.name;
+        entity.description = dto.description;
+        entity.priceInCents = dto.priceInCents;
+        entity.durationInMinutes = dto.durationInMinutes || 30;
+        entity.isActive = true;
+
+        return entity;
+    }
+
+    public static toDTO(entity: Service): ServiceResponseDto {
+        const dto = new ServiceResponseDto();
+
+        dto.id = entity.id;
+        dto.barbershopId = entity.barbershopId;
+        dto.name = entity.name;
+        dto.description = entity.description || "";
+        dto.priceInCents = entity.priceInCents;
+        dto.durationInMinutes = entity.durationInMinutes;
+        dto.isActive = entity.isActive;
+
+        return dto;
     }
 }
