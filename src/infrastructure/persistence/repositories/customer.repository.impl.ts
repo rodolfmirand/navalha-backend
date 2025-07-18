@@ -13,7 +13,8 @@ export class CustomerRepositoryImpl implements ICustomerRepository {
 
     async save(customer: Customer): Promise<Customer> {
         const model = CustomerMapper.toPersistence(customer);
-        return await this.repository.save(model);
+        const entity = await this.repository.save(model);
+        return CustomerMapper.toDomain(entity);
     }
 
     async findById(id: string): Promise<Customer | null> {
