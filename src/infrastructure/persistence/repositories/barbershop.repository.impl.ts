@@ -11,9 +11,10 @@ export class BarbershopRepositoryImpl implements IBarbershopRepository {
 
     constructor(@InjectRepository(BarbershopModel) private readonly repository: Repository<BarbershopModel>) { }
 
-    async save(barbershop: Barbershop): Promise<void> {
+    async save(barbershop: Barbershop): Promise<Barbershop> {
         const model = BarbershopMapper.toPersistence(barbershop);
-        await this.repository.save(model);
+        const entity = await this.repository.save(model);
+        return BarbershopMapper.toDomain(entity);
     }
 
     async findById(id: string): Promise<Barbershop | null> {
