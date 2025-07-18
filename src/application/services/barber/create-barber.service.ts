@@ -8,12 +8,12 @@ export class CreateBarberService {
 
     constructor(private readonly barberRepository: IBarberRepository, private readonly userRepository: IUserRepository) { }
 
-    async execute(barber: Barber): Promise<void> {
+    async execute(barber: Barber): Promise<Barber> {
         const user = await this.userRepository.findById(barber.userId);
         if (!user) {
             throw new NotFoundException("User not found");
         }
 
-        await this.barberRepository.save(barber);
+        return await this.barberRepository.save(barber);
     }
 }
