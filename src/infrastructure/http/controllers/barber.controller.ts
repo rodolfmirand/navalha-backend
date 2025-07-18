@@ -19,5 +19,7 @@ export class BarberController {
     @Post()
     async create(@Body() dto: CreateBarberDto): Promise<BarberResponseDto> {
         const barber = BarberMapper.fromDTO(dto);
+        const createdBarber = await this.createBarber.execute(barber);
+        return BarberMapper.toDTO(createdBarber);
     }
 }
