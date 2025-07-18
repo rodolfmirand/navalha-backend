@@ -2,6 +2,9 @@ import { Barber } from "src/domain/entities/barber.entity";
 import { BarberModel } from "../typeorm/models/barber.model";
 import { AppointmentMapper } from "./appointment.mapper";
 import { ServiceMapper } from "./service.mapper";
+import { CreateBarberDto } from "src/infrastructure/http/dtos/barber/create-barber.dto";
+import { BarberResponseDto } from "src/infrastructure/http/dtos/barber/barber-response.dto";
+import { Service } from "src/domain/entities/service.entity";
 
 export class BarberMapper {
     public static toDomain(model: BarberModel): Barber {
@@ -44,5 +47,31 @@ export class BarberMapper {
         }
 
         return model;
+    }
+
+    public static fromDTO(dto: CreateBarberDto): Barber {
+        const barber = new Barber();
+
+        barber.barbershopId = dto.barbershopId;
+        barber.specialties = dto.specialties;
+        barber.bio = dto.bio;
+
+        return barber;
+    }
+
+    public static toDTO(entity: Barber): BarberResponseDto {
+        const dto = new BarberResponseDto();
+
+        dto.id = entity.id;
+        dto.userId = entity.userId;
+        dto.barbershopId = entity.barbershopId;
+        dto.specialties = entity.specialties;
+        dto.bio = entity.bio || "";
+
+        if (entity.availableServices) {
+            dto.availableServices = entity.availableServices.map(ServiceMapper.toDTO);
+        }
+
+        return dto;
     }
 }
