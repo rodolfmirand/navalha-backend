@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { CreateBarberService } from "src/application/services/barber/create-barber.service";
 import { DeleteBarberService } from "src/application/services/barber/delete-barber.service";
 import { FindAllBarbersService } from "src/application/services/barber/find-all-barbers.service";
@@ -21,5 +21,17 @@ export class BarberController {
         const barber = BarberMapper.fromDTO(dto);
         const createdBarber = await this.createBarber.execute(barber);
         return BarberMapper.toDTO(createdBarber);
+    }
+
+    @Get(':id')
+    async find(@Param('id') id: string): Promise<BarberResponseDto> {
+        const barber = await this.findBarber.execute(id);
+        return BarberMapper.toDTO(barber);
+    }
+
+    @Get()
+    async findAll(): Promise<BarberResponseDto[]> {
+        const barbers = await this.findAllBarbers.execute();
+        return barbers.map(BarberMapper.toDTO);
     }
 }
