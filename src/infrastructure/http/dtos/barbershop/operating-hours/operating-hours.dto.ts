@@ -3,13 +3,13 @@ import { DayOfWeek } from "src/domain/enums/day-of-week";
 
 export class OperatingHoursDto {
     @IsEnum(DayOfWeek)
-    readonly dayOfWeek: DayOfWeek;
+    dayOfWeek: DayOfWeek;
 
     @IsNotEmpty()
     @IsString()
-    readonly openingTime: string;
+    openingTime: string;
 
     @IsNotEmpty()
     @IsString()
-    readonly closingTime: string;
+    closingTime: string;
 }

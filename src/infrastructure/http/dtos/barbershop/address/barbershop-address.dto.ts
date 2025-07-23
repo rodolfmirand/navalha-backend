@@ -1,24 +1,24 @@
-import { IsNotEmpty, IsString, Length, MaxLength } from "class-validator";
+import { IsNotEmpty, IsString, Length } from "class-validator";
 
 export class BarbershopAddressDto {
     @IsString()
     @IsNotEmpty()
-    readonly street: string;
+    street: string;
 
     @IsString()
     @IsNotEmpty()
-    readonly city: string;
+    city: string;
 
     @IsString()
     @IsNotEmpty()
-    readonly disctrict: string;
+    disctrict: string;
 
     @IsString()
     @IsNotEmpty()
-    readonly number: string;
+    number: string;
 
     @IsNotEmpty()
     @IsString()
     @Length(2)
-    readonly state: string;
+    state: string;
 }
