@@ -1,17 +1,11 @@
-import { Expose } from "class-transformer";
+import { Type } from "class-transformer";
+import { BookingPreferencesResponseDto } from "./preferences/booking-preferences-response.dto";
+import { ServicePreferencesResponseDto } from "./preferences/service-preferences-response.dto";
 
 export class CustomerPreferencesResponseDto {
-    @Expose()
-    booking?: {
-        preferredBarberId?: string;
-        preferredServicesIds?: string[];
-        sendReminder: boolean;
-    };
+    @Type(() => BookingPreferencesResponseDto)
+    readonly booking?: BookingPreferencesResponseDto;
 
-    @Expose()
-    service?: {
-        chatLevel: 'QUIET' | 'NORMAL' | 'CHATTY';
-        allergiesOrSensitivities?: string;
-        generalNotes?: string;
-    };
+    @Type(() => ServicePreferencesResponseDto)
+    readonly service?: ServicePreferencesResponseDto;
 }
