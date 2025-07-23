@@ -1,28 +1,18 @@
-import { Expose } from "class-transformer";
+import { IsDate, IsEnum } from "class-validator";
 import { AppointmentStatus } from "src/domain/enums/appointment-status.enum";
 
 export class AppointmentResponseDto {
-    @Expose()
-    id: string;
+    readonly id: string;
 
-    @Expose()
-    status: AppointmentStatus;
+    @IsEnum(AppointmentResponseDto)
+    readonly status: AppointmentStatus;
 
-    @Expose()
-    startTime: Date;
+    @IsDate()
+    readonly startTime: Date;
 
-    @Expose()
-    priceInCents: number;
-
-    @Expose()
-    customerId: string;
-
-    @Expose()
-    barberId: string;
-
-    @Expose()
-    barbershopId: string;
-
-    @Expose()
-    serviceId: string;
+    readonly priceInCents: number;
+    readonly customerId: string;
+    readonly barberId: string;
+    readonly barbershopId: string;
+    readonly serviceId: string;
 }

@@ -1,12 +1,17 @@
+import { Type } from "class-transformer";
 import { AppointmentResponseDto } from "../appointment/appointment-response.dto";
 import { ServiceResponseDto } from "../service/service-response.dto";
 
 export class BarberResponseDto {
-    id: string;
-    userId: string;
-    barbershopId: string;
-    specialties: string[];
-    bio: string;
-    availableServices: ServiceResponseDto[];
-    appointments: AppointmentResponseDto[];
+    readonly id: string;
+    readonly userId: string;
+    readonly barbershopId: string;
+    readonly specialties: string[];
+    readonly bio: string;
+
+    @Type(() => ServiceResponseDto)
+    readonly availableServices: ServiceResponseDto[];
+
+    @Type(() => AppointmentResponseDto)
+    readonly appointments: AppointmentResponseDto[];
 }
