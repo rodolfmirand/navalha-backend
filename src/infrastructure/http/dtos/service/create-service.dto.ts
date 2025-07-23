@@ -2,21 +2,21 @@ import { IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID } from "class-valida
 
 export class CreateServiceDto {
     @IsUUID('4')
-    readonly barbershopId: string;
+    barbershopId: string;
 
     @IsNotEmpty()
     @IsString()
-    readonly name: string;
+    name: string;
 
     @IsOptional()
     @IsString()
-    readonly description?: string;
+    description?: string;
 
     @IsNumber()
     @IsNotEmpty()
-    readonly priceInCents: number;
+    priceInCents: number;
 
     @IsNumber()
     @IsNotEmpty()
-    readonly durationInMinutes: number;
+    durationInMinutes: number;
 }

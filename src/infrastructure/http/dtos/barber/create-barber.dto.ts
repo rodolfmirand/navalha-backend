@@ -3,16 +3,16 @@ import { IsArray, IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validat
 export class CreateBarberDto {
     @IsUUID('4')
     @IsNotEmpty()
-    readonly barbershopId: string;
+    barbershopId: string;
 
     @IsUUID('4')
-    readonly userId: string;
+    userId: string;
 
     @IsArray()
     @IsOptional()
-    readonly specialties: string[];
+    specialties: string[];
 
     @IsOptional()
     @IsString()
-    readonly bio?: string;
+    bio?: string;
 }
