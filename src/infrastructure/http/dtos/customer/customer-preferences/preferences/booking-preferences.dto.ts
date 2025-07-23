@@ -3,12 +3,12 @@ import { IsBoolean, IsOptional, IsUUID } from "class-validator";
 export class BookingPreferencesDto {
     @IsOptional()
     @IsUUID()
-    readonly preferredBarberId?: string;
+    preferredBarberId?: string;
 
     @IsOptional()
     @IsUUID('4', { each: true })
-    readonly preferredServicesId?: string[];
-    
+    preferredServicesId?: string[];
+
     @IsBoolean()
-    readonly sendReminder: boolean;
+    sendReminder: boolean;
 }

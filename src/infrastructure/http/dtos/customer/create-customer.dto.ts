@@ -5,10 +5,10 @@ import { Type } from "class-transformer";
 export class CreateCustomerDto {
     @IsUUID('4')
     @IsNotEmpty()
-    readonly userId: string;
+    userId: string;
 
     @ValidateNested()
     @Type(() => CustomerPreferencesDto)
     @IsOptional()
-    readonly preferences?: CustomerPreferencesDto;
+    preferences?: CustomerPreferencesDto;
 }

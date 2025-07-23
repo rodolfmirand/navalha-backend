@@ -7,10 +7,10 @@ export class CustomerPreferencesDto {
     @IsOptional()
     @ValidateNested()
     @Type(() => BookingPreferencesDto)
-    readonly booking?: BookingPreferencesDto;
+    booking?: BookingPreferencesDto;
 
     @IsOptional()
     @ValidateNested()
     @Type(() => ServicePreferencesDto)
-    readonly services?: ServicePreferencesDto;
+    services?: ServicePreferencesDto;
 }
