@@ -3,14 +3,11 @@ import { CustomerPreferencesResponseDto } from "./customer-preferences/customer-
 import { AppointmentResponseDto } from "../appointment/appointment-response.dto";
 
 export class CustomerResponseDto {
-    @Expose()
-    id: string;
+    readonly id: string;
 
-    @Expose()
     @Type(() => CustomerPreferencesResponseDto)
-    preferences?: CustomerPreferencesResponseDto;
+    readonly preferences?: CustomerPreferencesResponseDto;
 
     @Type(() => AppointmentResponseDto)
-    @Expose()
-    appointments?: AppointmentResponseDto[];
+    readonly appointments?: AppointmentResponseDto[];
 }
