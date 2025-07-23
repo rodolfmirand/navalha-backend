@@ -1,37 +1,37 @@
 import { IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
-import { BarbershopAddressDto } from "./barbershop-address.dto";
+import { BarbershopAddressDto } from "./address/barbershop-address.dto";
 import { Type } from "class-transformer";
-import { OperatingHoursDto } from "./operating-hours.dto";
+import { OperatingHoursDto } from "./operating-hours/operating-hours.dto";
 
 export class CreateBarbershopDto {
     @IsUUID('4')
     @IsNotEmpty()
-    readonly ownerId: string;
+    ownerId: string;
 
     @IsString()
     @IsNotEmpty()
-    readonly name: string;
+    name: string;
 
     @IsOptional()
     @IsString()
-    readonly description?: string;
+    description?: string;
 
     @IsOptional()
     @IsString()
-    readonly logoUrl?: string;
+    logoUrl?: string;
 
     @IsNotEmpty()
     @Type(() => BarbershopAddressDto)
-    readonly address: BarbershopAddressDto;
+    address: BarbershopAddressDto;
 
     @IsNotEmpty()
     @IsString()
-    readonly contactEmail: string;
+    contactEmail: string;
 
     @IsNotEmpty()
     @IsString()
-    readonly contactPhone: string;
+    contactPhone: string;
 
     @Type(() => OperatingHoursDto)
-    readonly operatingHours: OperatingHoursDto;
+    operatingHours: OperatingHoursDto;
 }
