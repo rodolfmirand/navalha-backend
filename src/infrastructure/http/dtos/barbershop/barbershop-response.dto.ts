@@ -25,5 +25,5 @@ export class BarbershopResponseDto {
     readonly services: ServiceResponseDto[];
 
     @Type(() => OperatingHoursDto)
-    readonly operatingHours: OperatingHoursDto;
+    readonly operatingHours: OperatingHoursDto[];
 }
