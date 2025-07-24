@@ -11,9 +11,10 @@ export class ServiceRepositoryImpl implements IServiceRepository {
 
     constructor(@InjectRepository(ServiceModel) private readonly repository: Repository<ServiceModel>) { }
 
-    async save(service: Service): Promise<void> {
+    async save(service: Service): Promise<Service> {
         const model = ServiceMapper.toPersistence(service);
-        await this.repository.save(model);
+        const entity = await this.repository.save(model);
+        return entity;
     }
 
     async findById(id: string): Promise<Service | null> {

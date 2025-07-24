@@ -8,12 +8,12 @@ export class CreateServiceService {
 
     constructor(private readonly serviceRepository: IServiceRepository, private readonly barbershopRepository: IBarbershopRepository) { }
 
-    async execute(service: Service): Promise<void> {
+    async execute(service: Service): Promise<Service> {
         const barbershop = await this.barbershopRepository.findById(service.barbershopId);
         if (!barbershop) {
             throw new NotFoundException("Barber Shop not found.");
         }
 
-        await this.serviceRepository.save(service);
+        return await this.serviceRepository.save(service);
     }
 }
