@@ -60,18 +60,16 @@ export class BarberMapper {
     }
 
     public static toDTO(entity: Barber): BarberResponseDto {
-        const dto = new BarberResponseDto();
+        return {
+            id: entity.id,
+            userId: entity.userId,
+            barbershopId: entity.barbershopId,
+            specialties: entity.specialties,
+            bio: entity.bio || '',
 
-        dto.id = entity.id;
-        dto.userId = entity.userId;
-        dto.barbershopId = entity.barbershopId;
-        dto.specialties = entity.specialties;
-        dto.bio = entity.bio || "";
+            availableServices: entity.availableServices?.map(ServiceMapper.toDTO) || [],
 
-        if (entity.availableServices) {
-            dto.availableServices = entity.availableServices.map(ServiceMapper.toDTO);
+            appointments: entity.appointments?.map(AppointmentMapper.toDTO) || []
         }
-
-        return dto;
     }
 }

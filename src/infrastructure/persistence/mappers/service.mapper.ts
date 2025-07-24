@@ -46,16 +46,17 @@ export class ServiceMapper {
     }
 
     public static toDTO(entity: Service): ServiceResponseDto {
-        const dto = new ServiceResponseDto();
+        return {
+            id: entity.id,
+            barbershopId: entity.barbershopId,
 
-        dto.id = entity.id;
-        dto.barbershopId = entity.barbershopId;
-        dto.name = entity.name;
-        dto.description = entity.description || "";
-        dto.priceInCents = entity.priceInCents;
-        dto.durationInMinutes = entity.durationInMinutes;
-        dto.isActive = entity.isActive;
+            name: entity.name,
+            description: entity.description || '',
 
-        return dto;
+            priceInCents: entity.priceInCents,
+            durationInMinutes: entity.durationInMinutes,
+
+            isActive: entity.isActive
+        }
     }
 }

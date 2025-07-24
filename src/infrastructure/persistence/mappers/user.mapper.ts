@@ -41,15 +41,13 @@ export class UserMapper {
         return entity;
     }
 
-    public static toDTO(user: User): UserResponseDTO {
-        const dto = new UserResponseDTO();
-
-        dto.id = user.id;
-        dto.name = user.name;
-        dto.email = user.email;
-        dto.phoneNumber = user.phoneNumber;
-        dto.role = user.role;
-
-        return dto;
+    public static toDTO(entity: User): UserResponseDTO {
+        return {
+            id: entity.id,
+            name: entity.name,
+            email: entity.email,
+            phoneNumber: entity.phoneNumber,
+            role: entity.role
+        }
     }
 }

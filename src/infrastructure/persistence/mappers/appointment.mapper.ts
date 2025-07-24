@@ -34,17 +34,18 @@ export class AppointmentMapper {
     }
 
     public static toDTO(entity: Appointment): AppointmentResponseDto {
-        const dto = new AppointmentResponseDto();
+        return {
+            id: entity.id,
+            customerId: entity.customerId,
+            barberId: entity.barberId,
+            barbershopId: entity.barbershopId,
+            serviceId: entity.serviceId,
+            
+            priceInCents: entity.priceInCents,
 
-        dto.id = entity.id;
-        dto.customerId = entity.customerId;
-        dto.barberId = entity.barberId;
-        dto.barbershopId = entity.barbershopId;
-        dto.serviceId = entity.serviceId;
-        dto.status = entity.status;
-        dto.startTime = entity.startTime;
-        dto.priceInCents = entity.priceInCents;
+            status: entity.status,
 
-        return dto;
+            startTime: entity.startTime
+        }
     }
 }
