@@ -11,7 +11,7 @@ export class BarbershopAddressDto {
 
     @IsString()
     @IsNotEmpty()
-    disctrict: string;
+    district: string;
 
     @IsString()
     @IsNotEmpty()
