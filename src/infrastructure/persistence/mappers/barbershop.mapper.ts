@@ -4,6 +4,9 @@ import { BarberMapper } from "./barber.mapper";
 import { ServiceMapper } from "./service.mapper";
 import { AppointmentMapper } from "./appointment.mapper";
 import { OperatingHoursMapper } from "./operating-hours.mapper";
+import { CreateBarbershopDto } from "src/infrastructure/http/dtos/barbershop/create-barbershop.dto";
+import { BarbershopResponseDto } from "src/infrastructure/http/dtos/barbershop/barbershop-response.dto";
+import { BarbershopAddressMapper } from "./barbershop-address.mapper";
 
 export class BarbershopMapper {
     public static toDomain(model: BarbershopModel): Barbershop {
@@ -50,5 +53,49 @@ export class BarbershopMapper {
         model.contactEmail = entity.contactEmail;
 
         return model;
+    }
+
+    public static fromDTO(dto: CreateBarbershopDto): Barbershop {
+        const entity = new Barbershop();
+
+        entity.name = dto.name;
+        entity.ownerId = dto.ownerId;
+        entity.description = dto.description;
+
+        entity.address = {
+            street: dto.address.street,
+            number: dto.address.number,
+            district: dto.address.district,
+            city: dto.address.city,
+            state: dto.address.state
+        }
+
+        entity.contactPhone = dto.contactPhone;
+        entity.contactEmail = dto.contactEmail;
+        entity.logoUrl = dto.logoUrl;
+        entity.operatingHours = dto.operatingHours.map(OperatingHoursMapper.fromDTO);
+
+        return entity;
+    }
+
+    public static toDTO(entity: Barbershop): BarbershopResponseDto {
+        return {
+            id: entity.id,
+            ownerId: entity.ownerId,
+
+            name: entity.name,
+            description: entity.description,
+            logoUrl: entity.logoUrl,
+
+            address: BarbershopAddressMapper.toDTO(entity.address),
+
+            contactEmail: entity.contactEmail,
+            contactPhone: entity.contactPhone,
+
+            barbers: entity.barbers.map(BarberMapper.toDTO),
+            services: entity.services.map(ServiceMapper.toDTO),
+
+            operatingHours: entity.operatingHours.map(OperatingHoursMapper.toDTO)
+        }
     }
 }
