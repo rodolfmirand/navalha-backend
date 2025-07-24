@@ -1,9 +1,9 @@
 import { UserRole } from "src/domain/enums/user-role.enum";
 
 export class UserResponseDTO {
-    id: string;
-    name: string;
-    email: string;
-    phoneNumber: string;
-    role: UserRole;
+    readonly id: string;
+    readonly name: string;
+    readonly email: string;
+    readonly phoneNumber: string;
+    readonly role: UserRole;
 }

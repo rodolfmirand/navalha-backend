@@ -1,11 +1,11 @@
 export class ServiceResponseDto {
-    id: string;
-    barbershopId: string;
+    readonly id: string;
+    readonly barbershopId: string;
 
-    name: string;
-    description: string;
-    
-    priceInCents: number;
-    durationInMinutes: number;
-    isActive: boolean;
+    readonly name: string;
+    readonly description: string;
+
+    readonly priceInCents: number;
+    readonly durationInMinutes: number;
+    readonly isActive: boolean;
 }
