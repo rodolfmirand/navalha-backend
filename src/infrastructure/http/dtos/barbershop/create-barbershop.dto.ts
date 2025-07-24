@@ -33,5 +33,5 @@ export class CreateBarbershopDto {
     contactPhone: string;
 
     @Type(() => OperatingHoursDto)
-    operatingHours: OperatingHoursDto;
+    operatingHours: OperatingHoursDto[];
 }
