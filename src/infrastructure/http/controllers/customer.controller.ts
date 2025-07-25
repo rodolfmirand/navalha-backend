@@ -7,7 +7,7 @@ import { CreateCustomerDto } from "../dtos/customer/create-customer.dto";
 import { CustomerResponseDto } from "../dtos/customer/customer-response.dto";
 import { CustomerMapper } from "src/infrastructure/persistence/mappers/customer.mapper";
 
-@Controller()
+@Controller('customer')
 export class CustomerController {
 
     constructor(private readonly createCustomer: CreateCustomerService,
