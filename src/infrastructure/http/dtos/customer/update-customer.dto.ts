@@ -2,7 +2,7 @@ import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional, ValidateNested } 
 import { CustomerPreferencesDto } from './customer-preferences/customer-preferences.dto';
 import { Type } from "class-transformer";
 
-export class UpdateClientDto {
+export class UpdateCustomerDto {
     @IsOptional()
     @IsString()
     @IsNotEmpty()
