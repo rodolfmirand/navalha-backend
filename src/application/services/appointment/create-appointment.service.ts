@@ -16,7 +16,7 @@ export class CreateAppointmentService {
         private readonly appointmentRepository: IAppointmentRepository
     ) { }
 
-    async execute(appointment: Appointment): Promise<void> {
+    async execute(appointment: Appointment): Promise<Appointment> {
         const customer = await this.customerRepository.findById(appointment.customerId);
         if (!customer) {
             throw new NotFoundException("Customer not found.");
@@ -37,6 +37,8 @@ export class CreateAppointmentService {
             throw new NotFoundException("Service not found");
         }
 
-        await this.appointmentRepository.save(appointment);
+        appointment.priceInCents = service.priceInCents;
+
+        return await this.appointmentRepository.save(appointment);
     }
 }

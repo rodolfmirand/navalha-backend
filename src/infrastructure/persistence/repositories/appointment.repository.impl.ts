@@ -11,9 +11,10 @@ export class AppointmentRepositoryImpl implements IAppointmentRepository {
 
     constructor(@InjectRepository(AppointmentModel) private readonly repository: Repository<AppointmentModel>) { }
 
-    async save(appointment: Appointment): Promise<void> {
+    async save(appointment: Appointment): Promise<Appointment> {
         const model = AppointmentMapper.toPersistence(appointment);
-        await this.repository.save(model);
+        const entity = await this.repository.save(model);
+        return entity;
     }
 
     async findById(id: string): Promise<Appointment | null> {
