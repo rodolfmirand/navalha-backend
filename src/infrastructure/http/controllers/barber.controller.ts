@@ -7,7 +7,7 @@ import { CreateBarberDto } from "../dtos/barber/create-barber.dto";
 import { BarberResponseDto } from "../dtos/barber/barber-response.dto";
 import { BarberMapper } from "src/infrastructure/persistence/mappers/barber.mapper";
 
-@Controller()
+@Controller('barber')
 export class BarberController {
 
     constructor(private readonly createBarber: CreateBarberService,
