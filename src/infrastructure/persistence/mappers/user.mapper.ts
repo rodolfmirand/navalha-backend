@@ -2,6 +2,7 @@ import { User } from 'src/domain/entities/user.entity';
 import { UserModel } from '../typeorm/models/user.model';
 import { CreateUserDto } from '../../http/dtos/user/create-user.dto';
 import { UserResponseDTO } from 'src/infrastructure/http/dtos/user/user-response.dto';
+import { UpdateUserDto } from 'src/infrastructure/http/dtos/user/user-update.dto';
 export class UserMapper {
     public static toDomain(model: UserModel): User {
         const entity = new User();
@@ -29,7 +30,7 @@ export class UserMapper {
         return model;
     }
 
-    public static fromDTO(dto: CreateUserDto): User {
+    public static fromCreateDTO(dto: CreateUserDto): User {
         const entity = new User();
 
         entity.id = "";
@@ -38,6 +39,17 @@ export class UserMapper {
         entity.phoneNumber = dto.phoneNumber;
         entity.password = dto.password;
 
+        return entity;
+    }
+
+    public static fromUpdateDTO(dto: UpdateUserDto): User {
+        const entity = new User();
+        
+        entity.id = "";
+        if (dto.name !== undefined) entity.name = dto.name;
+        if (dto.email !== undefined) entity.email = dto.email;
+        if (dto.phoneNumber !== undefined) entity.phoneNumber = dto.phoneNumber;
+        
         return entity;
     }
 
