@@ -4,6 +4,7 @@ import { AppointmentMapper } from './appointment.mapper';
 import { CreateCustomerDto } from 'src/infrastructure/http/dtos/customer/create-customer.dto';
 import { CustomerResponseDto } from 'src/infrastructure/http/dtos/customer/customer-response.dto';
 import { CustomerPreferencesMapper } from './customer-preferences.mapper';
+import { UpdateCustomerDto } from 'src/infrastructure/http/dtos/customer/update-customer.dto';
 
 export class CustomerMapper {
   public static toDomain(model: CustomerModel): Customer {
@@ -36,7 +37,7 @@ export class CustomerMapper {
     return model;
   }
 
-  public static fromDTO(dto: CreateCustomerDto): CustomerModel {
+  public static fromCreateDTO(dto: CreateCustomerDto): Customer {
     const entity = new CustomerModel();
 
     entity.userId = dto.userId;
@@ -44,6 +45,14 @@ export class CustomerMapper {
     if (dto.preferences) {
       entity.preferences = dto.preferences;
     }
+
+    return entity;
+  }
+
+  public static fromUpdateDTO(dto: UpdateCustomerDto): Customer {
+    const entity = new Customer();
+
+    entity.preferences = dto.preferences;
 
     return entity;
   }
