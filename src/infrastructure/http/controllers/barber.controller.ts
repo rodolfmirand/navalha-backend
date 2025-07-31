@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { CreateBarberService } from "src/application/services/barber/create-barber.service";
 import { DeleteBarberService } from "src/application/services/barber/delete-barber.service";
 import { FindAllBarbersService } from "src/application/services/barber/find-all-barbers.service";
@@ -6,6 +6,8 @@ import { FindBarberService } from "src/application/services/barber/find-barber.s
 import { CreateBarberDto } from "../dtos/barber/create-barber.dto";
 import { BarberResponseDto } from "../dtos/barber/barber-response.dto";
 import { BarberMapper } from "src/infrastructure/persistence/mappers/barber.mapper";
+import { UpdateBarberDto } from "../dtos/barber/update-barber.dto";
+import { UpdateBarberService } from "src/application/services/barber/update-barber.service";
 
 @Controller('barber')
 export class BarberController {
@@ -13,12 +15,13 @@ export class BarberController {
     constructor(private readonly createBarber: CreateBarberService,
         private readonly findBarber: FindBarberService,
         private readonly findAllBarbers: FindAllBarbersService,
-        private readonly deleteBarber: DeleteBarberService
+        private readonly deleteBarber: DeleteBarberService,
+        private readonly updateBarber: UpdateBarberService
     ) { }
 
     @Post()
     async create(@Body() dto: CreateBarberDto): Promise<BarberResponseDto> {
-        const barber = BarberMapper.fromDTO(dto);
+        const barber = BarberMapper.fromCreateDTO(dto);
         const createdBarber = await this.createBarber.execute(barber);
         return BarberMapper.toDTO(createdBarber);
     }
@@ -38,5 +41,12 @@ export class BarberController {
     @Delete(':id')
     async delete(@Param('id') id: string): Promise<void> {
         await this.deleteBarber.execute(id);
+    }
+
+    @Put(':id')
+    async update(@Param('id') id: string, @Body() dto: UpdateBarberDto): Promise<BarberResponseDto> {
+        const barber = BarberMapper.fromUpdateDTO(dto);
+        const updatedBarber = await this.updateBarber.execute(id, barber);
+        return BarberMapper.toDTO(updatedBarber);
     }
 }
