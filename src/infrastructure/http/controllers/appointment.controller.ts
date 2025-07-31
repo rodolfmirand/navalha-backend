@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CreateAppointmentService } from "src/application/services/appointment/create-appointment.service";
 import { FindAppointmentService } from '../../../application/services/appointment/find-appointment.service';
 import { FindAllAppointmentsService } from "src/application/services/appointment/find-all-appointments.service";
@@ -6,6 +6,9 @@ import { DeleteAppointmentService } from 'src/application/services/appointment/d
 import { CreateAppointmentDto } from '../dtos/appointment/create-appointment.dto';
 import { AppointmentResponseDto } from '../dtos/appointment/appointment-response.dto';
 import { AppointmentMapper } from 'src/infrastructure/persistence/mappers/appointment.mapper';
+import { AppointmentStatus } from 'src/domain/enums/appointment-status.enum';
+import { UpdateAppointmentService } from 'src/application/services/appointment/update-appointment.service';
+import { UpdateAppointmentDto } from '../dtos/appointment/update-appointment.dto';
 
 @Controller('appointment')
 export class AppointmentController {
@@ -13,7 +16,8 @@ export class AppointmentController {
     constructor(private readonly createAppointment: CreateAppointmentService,
         private readonly findAppointment: FindAppointmentService,
         private readonly findAllAppointment: FindAllAppointmentsService,
-        private readonly deleteAppointment: DeleteAppointmentService
+        private readonly deleteAppointment: DeleteAppointmentService,
+        private readonly updateAppointment: UpdateAppointmentService
     ) { }
 
     @Post()
@@ -39,5 +43,9 @@ export class AppointmentController {
     async delete(@Param('id') id: string): Promise<void> {
         await this.deleteAppointment.execute(id);
     }
-    
+
+    @Put(':id')
+    async update(@Param('id') id: string, @Body() dto: UpdateAppointmentDto): Promise<void> {
+        await this.updateAppointment.execute(id, dto.status);
+    }
 }
