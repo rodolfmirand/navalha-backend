@@ -1,5 +1,7 @@
 import { Service } from "../entities/service.entity";
 
+export const IServiceRepository = Symbol('IServiceRepository');
+
 export interface IServiceRepository {
     save(service: Service): Promise<Service>;
     findById(id: string): Promise<Service | null>;

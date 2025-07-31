@@ -1,5 +1,7 @@
 import { Barber } from "../entities/barber.entity";
 
+export const IBarberRepository = Symbol('IBarberRepository');
+
 export interface IBarberRepository {
     save(barber: Barber): Promise<Barber>;
     findById(id: string): Promise<Barber | null>;
