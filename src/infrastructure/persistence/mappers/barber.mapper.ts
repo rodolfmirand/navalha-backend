@@ -4,7 +4,7 @@ import { AppointmentMapper } from "./appointment.mapper";
 import { ServiceMapper } from "./service.mapper";
 import { CreateBarberDto } from "src/infrastructure/http/dtos/barber/create-barber.dto";
 import { BarberResponseDto } from "src/infrastructure/http/dtos/barber/barber-response.dto";
-import { Service } from "src/domain/entities/service.entity";
+import { UpdateBarberDto } from "src/infrastructure/http/dtos/barber/update-barber.dto";
 
 export class BarberMapper {
     public static toDomain(model: BarberModel): Barber {
@@ -49,14 +49,23 @@ export class BarberMapper {
         return model;
     }
 
-    public static fromDTO(dto: CreateBarberDto): Barber {
-        const barber = new Barber();
+    public static fromCreateDTO(dto: CreateBarberDto): Barber {
+        const entity = new Barber();
 
-        barber.barbershopId = dto.barbershopId;
-        barber.specialties = dto.specialties;
-        barber.bio = dto.bio;
+        entity.barbershopId = dto.barbershopId;
+        entity.specialties = dto.specialties;
+        entity.bio = dto.bio;
 
-        return barber;
+        return entity;
+    }
+
+    public static fromUpdateDTO(dto: UpdateBarberDto): Barber {
+        const entity = new Barber();
+
+        entity.specialties = dto.specialties;
+        if(dto.bio !== undefined) entity.bio = dto.bio;
+
+        return entity;
     }
 
     public static toDTO(entity: Barber): BarberResponseDto {
