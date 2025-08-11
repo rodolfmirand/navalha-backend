@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { UserModel } from "./user.model";
 import { BarberModel } from "./barber.model";
 import { ServiceModel } from "./service.model";
@@ -7,7 +7,7 @@ import { AppointmentModel } from "./appointment.model";
 
 @Entity({ name: 'barbershops' })
 export class BarbershopModel {
-    @PrimaryColumn('uuid')
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
