@@ -1,5 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { FindAllCUstomersService } from "src/application/services/customer/find-all-customers.service";
+import { Body, Controller, Delete, Get, Param, Post, Put, NotFoundException, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateUserService } from "src/application/services/user/create-user.service";
 import { DeleteUserService } from "src/application/services/user/delete-user.service";
 import { FindUserService } from "src/application/services/user/find-user.service";
@@ -9,6 +8,7 @@ import { UserResponseDTO } from "../dtos/user/user-response.dto";
 import { FindAllUsersService } from "src/application/services/user/find-all-users.service";
 import { UpdateUserDto } from "../dtos/user/user-update.dto";
 import { UpdateUserService } from "src/application/services/user/update-user.service";
+import { STATUS_CODES } from 'http';
 
 @Controller('user')
 export class UserController {
@@ -22,9 +22,17 @@ export class UserController {
 
     @Post()
     async create(@Body() dto: CreateUserDto): Promise<UserResponseDTO> {
-        const user = UserMapper.fromCreateDTO(dto);
-        const savedUser = await this.createUser.execute(user);
-        return UserMapper.toDTO(savedUser);
+        try {
+            const user = UserMapper.fromCreateDTO(dto);
+            const savedUser = await this.createUser.execute(user);
+            return UserMapper.toDTO(savedUser);
+        } catch (error) {
+            throw new HttpException({
+                statusCode: HttpStatus.BAD_REQUEST,
+                message: error.message
+            },
+                HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Get(':id')
