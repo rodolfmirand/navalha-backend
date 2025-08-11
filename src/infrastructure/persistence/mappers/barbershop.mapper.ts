@@ -73,7 +73,6 @@ export class BarbershopMapper {
         entity.contactPhone = dto.contactPhone;
         entity.contactEmail = dto.contactEmail;
         entity.logoUrl = dto.logoUrl;
-        entity.operatingHours = dto.operatingHours.map(OperatingHoursMapper.fromDTO);
 
         return entity;
     }
@@ -92,10 +91,9 @@ export class BarbershopMapper {
             contactEmail: entity.contactEmail,
             contactPhone: entity.contactPhone,
 
-            barbers: entity.barbers.map(BarberMapper.toDTO),
-            services: entity.services.map(ServiceMapper.toDTO),
-
-            operatingHours: entity.operatingHours.map(OperatingHoursMapper.toDTO)
+            barbers: entity.barbers ? entity.barbers.map(BarberMapper.toDTO) : [],
+            services: entity.services ? entity.services.map(ServiceMapper.toDTO) : [],
+            operatingHours: entity.operatingHours ? entity.operatingHours.map(OperatingHoursMapper.toDTO) : []
         }
     }
 }
