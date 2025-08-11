@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Barbershop } from "src/domain/entities/barbershop.entity";
-import { IBarbershopRepository } from "src/domain/repositories/ibarbershop.repository";
-import { IUserRepository } from "src/domain/repositories/iuser.repository";
+import { BarbershopRepositoryImpl } from "src/infrastructure/persistence/repositories/barbershop.repository.impl";
+import { UserRepositoryImpl } from "src/infrastructure/persistence/repositories/user.repository.impl";
 
 @Injectable()
 export class CreateBarbershopService {
 
-    constructor(private readonly barbershopRepository: IBarbershopRepository,
-        private readonly userRepository: IUserRepository,
+    constructor(private readonly barbershopRepository: BarbershopRepositoryImpl,
+        private readonly userRepository: UserRepositoryImpl,
     ) { }
 
     async execute(barbershop: Barbershop): Promise<Barbershop> {
