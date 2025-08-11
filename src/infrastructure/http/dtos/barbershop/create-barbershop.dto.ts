@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
+import { IsNotEmpty, IsOptional, IsPhoneNumber, IsString, IsUUID } from "class-validator";
 import { BarbershopAddressDto } from "./address/barbershop-address.dto";
 import { Type } from "class-transformer";
 import { OperatingHoursDto } from "./operating-hours/operating-hours.dto";
@@ -30,8 +30,7 @@ export class CreateBarbershopDto {
 
     @IsNotEmpty()
     @IsString()
+    @IsPhoneNumber('BR')
     contactPhone: string;
 
-    @Type(() => OperatingHoursDto)
-    operatingHours: OperatingHoursDto[];
 }
