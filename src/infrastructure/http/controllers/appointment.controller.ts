@@ -6,7 +6,6 @@ import { DeleteAppointmentService } from 'src/application/services/appointment/d
 import { CreateAppointmentDto } from '../dtos/appointment/create-appointment.dto';
 import { AppointmentResponseDto } from '../dtos/appointment/appointment-response.dto';
 import { AppointmentMapper } from 'src/infrastructure/persistence/mappers/appointment.mapper';
-import { AppointmentStatus } from 'src/domain/enums/appointment-status.enum';
 import { UpdateAppointmentService } from 'src/application/services/appointment/update-appointment.service';
 import { UpdateAppointmentDto } from '../dtos/appointment/update-appointment.dto';
 
