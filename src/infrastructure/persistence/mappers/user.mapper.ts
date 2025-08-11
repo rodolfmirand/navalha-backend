@@ -20,7 +20,6 @@ export class UserMapper {
     public static toPersistence(entity: User): UserModel {
         const model = new UserModel();
 
-        model.id = entity.id;
         model.name = entity.name;
         model.email = entity.email;
         model.passwordHash = entity.password;
@@ -33,7 +32,6 @@ export class UserMapper {
     public static fromCreateDTO(dto: CreateUserDto): User {
         const entity = new User();
 
-        entity.id = "";
         entity.name = dto.name;
         entity.email = dto.email;
         entity.phoneNumber = dto.phoneNumber;
@@ -45,7 +43,6 @@ export class UserMapper {
     public static fromUpdateDTO(dto: UpdateUserDto): User {
         const entity = new User();
         
-        entity.id = "";
         if (dto.name !== undefined) entity.name = dto.name;
         if (dto.email !== undefined) entity.email = dto.email;
         if (dto.phoneNumber !== undefined) entity.phoneNumber = dto.phoneNumber;
