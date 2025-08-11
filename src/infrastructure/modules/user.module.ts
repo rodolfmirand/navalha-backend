@@ -12,6 +12,7 @@ import { UserModel } from "../persistence/typeorm/models/user.model";
 @Module({
     imports: [TypeOrmModule.forFeature([UserModel])],
     controllers: [UserController],
-    providers: [CreateUserService, FindUserService, FindAllUsersService, DeleteUserService, UpdateUserService, UserRepositoryImpl]
+    providers: [CreateUserService, FindUserService, FindAllUsersService, DeleteUserService, UpdateUserService, UserRepositoryImpl],
+    exports: [UserRepositoryImpl]
 })
 export class UserModule { }
