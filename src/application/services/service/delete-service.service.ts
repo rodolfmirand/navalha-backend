@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { IServiceRepository } from "src/domain/repositories/iservice.repository";
+import { ServiceRepositoryImpl } from "src/infrastructure/persistence/repositories/service.repository.impl";
 
 @Injectable()
 export class DeleteServiceService {
 
-    constructor(private readonly repository: IServiceRepository) { }
+    constructor(private readonly repository: ServiceRepositoryImpl) { }
 
     async execute(id: string): Promise<void> {
         const service = await this.repository.findById(id);
