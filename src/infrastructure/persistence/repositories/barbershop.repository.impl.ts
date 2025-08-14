@@ -18,12 +18,12 @@ export class BarbershopRepositoryImpl implements IBarbershopRepository {
     }
 
     async findById(id: string): Promise<Barbershop | null> {
-        const models = await this.repository.findOneBy({ id });
+        const models = await this.repository.findOne({ where: { id }, relations: ['barbers', 'services', 'operatingHours', 'appointments'] });
         return models ? BarbershopMapper.toDomain(models) : null;
     }
 
     async findAll(): Promise<Barbershop[]> {
-        const models = await this.repository.find();
+        const models = await this.repository.find({ relations: ['barbers', 'services', 'operatingHours', 'appointments'] });
         return models.map(BarbershopMapper.toDomain);
     }
 
