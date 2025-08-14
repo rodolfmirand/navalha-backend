@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { UserModel } from "./user.model";
 import { BarberModel } from "./barber.model";
 import { ServiceModel } from "./service.model";
@@ -13,13 +13,13 @@ export class BarbershopModel {
     @Column()
     name: string;
 
-    @Column({type: 'text', nullable: true})
+    @Column({ type: 'text', nullable: true })
     description?: string;
 
-    @Column({nullable: true})
+    @Column({ nullable: true })
     logoUrl?: string;
 
-    @Column({type: 'jsonb'})
+    @Column({ type: 'jsonb' })
     address: {
         street: string;
         city: string;
@@ -31,7 +31,7 @@ export class BarbershopModel {
     @Column()
     contactPhone: string;
 
-    @Column({unique: true})
+    @Column({ unique: true })
     contactEmail: string;
 
     @Column('uuid')
@@ -40,7 +40,7 @@ export class BarbershopModel {
     @OneToOne(() => UserModel)
     owner: UserModel;
 
-    @OneToMany(()=> BarberModel, (barber) => barber.barbershop)
+    @OneToMany(() => BarberModel, (barber) => barber.barbershop)
     barbers: BarberModel[];
 
     @OneToMany(() => ServiceModel, (service) => service.barbershop)

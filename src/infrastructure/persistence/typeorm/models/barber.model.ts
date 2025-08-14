@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { UserModel } from "./user.model";
 import { BarbershopModel } from "./barbershop.model";
 import { ServiceModel } from "./service.model";
@@ -6,7 +6,7 @@ import { AppointmentModel } from "./appointment.model";
 
 @Entity({ name: 'barbers' })
 export class BarberModel {
-    @PrimaryColumn('uuid')
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column('uuid')
@@ -20,15 +20,16 @@ export class BarberModel {
     barbershopId: string;
 
     @ManyToOne(() => BarbershopModel, (barbershop) => barbershop.barbers)
+    @JoinColumn({ name: 'barbershopId' })
     barbershop: BarbershopModel;
 
     @Column({ type: 'simple-array', nullable: true })
     specialties: string[];
 
-    @Column({ type: 'text', nullable: true})
+    @Column({ type: 'text', nullable: true })
     bio?: string;
 
-    @ManyToMany(() => ServiceModel)
+    @ManyToMany(() => ServiceModel, (service) => service.barbers)
     @JoinTable({
         name: 'barbers_services',
         joinColumn: { name: 'barberId', referencedColumnName: 'id' },

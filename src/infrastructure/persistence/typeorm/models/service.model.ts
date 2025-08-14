@@ -1,10 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { BarbershopModel } from "./barbershop.model";
 import { BarberModel } from "./barber.model";
 
 @Entity({ name: 'services' })
 export class ServiceModel {
-    @PrimaryColumn('uuid')
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column('uuid')
@@ -25,10 +25,10 @@ export class ServiceModel {
     @Column({ default: true, type: 'boolean' })
     isActive: boolean;
 
-    @ManyToOne(() => BarbershopModel)
+    @ManyToOne(() => BarbershopModel, (barbershop) => barbershop.services)
     @JoinColumn({ name: 'barbershopId' })
     barbershop: BarbershopModel;
 
-    @ManyToMany(() => BarberModel, (barber) => barber.appointments)
+    @ManyToMany(() => BarberModel, (barber) => barber.availableServices)
     barbers: BarberModel[];
 }
