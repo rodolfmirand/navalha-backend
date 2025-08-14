@@ -8,5 +8,5 @@ export class UpdateBarberDto {
     @IsOptional()
     @IsString()
     @IsNotEmpty()
-    bio?: string;
+    bio: string;
 }
