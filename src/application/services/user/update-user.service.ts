@@ -16,6 +16,7 @@ export class UpdateUserService {
         if (user.name !== undefined) existingUser.name = user.name;
         if (user.email !== undefined) existingUser.email = user.email;
         if (user.phoneNumber !== undefined) existingUser.phoneNumber = user.phoneNumber;
+        if (user.role !== undefined) existingUser.role = user.role; 
 
         return await this.repository.save(existingUser);
     }
