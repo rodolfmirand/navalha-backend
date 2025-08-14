@@ -52,6 +52,7 @@ export class BarberMapper {
     public static fromCreateDTO(dto: CreateBarberDto): Barber {
         const entity = new Barber();
 
+        entity.userId = dto.userId;
         entity.barbershopId = dto.barbershopId;
         entity.specialties = dto.specialties;
         entity.bio = dto.bio;
@@ -63,7 +64,7 @@ export class BarberMapper {
         const entity = new Barber();
 
         entity.specialties = dto.specialties;
-        if(dto.bio !== undefined) entity.bio = dto.bio;
+        if (dto.bio !== undefined) entity.bio = dto.bio;
 
         return entity;
     }
