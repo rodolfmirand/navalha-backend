@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { CreateServiceService } from "src/application/services/service/create-service.service";
 import { DeleteServiceService } from "src/application/services/service/delete-service.service";
 import { FindAllServicesService } from "src/application/services/service/find-all-services.service";
@@ -6,6 +6,8 @@ import { FindServiceService } from "src/application/services/service/find-servic
 import { CreateServiceDto } from "../dtos/service/create-service.dto";
 import { ServiceResponseDto } from "../dtos/service/service-response.dto";
 import { ServiceMapper } from "src/infrastructure/persistence/mappers/service.mapper";
+import { AddServiceToBarberDto } from "../dtos/service/add-service-to-barber.dto";
+import { AddServiceToBarberService } from "src/application/services/service/add-service-to-barber.service";
 
 @Controller('service')
 export class ServiceController {
@@ -13,7 +15,8 @@ export class ServiceController {
     constructor(private readonly createService: CreateServiceService,
         private readonly findService: FindServiceService,
         private readonly findAllServices: FindAllServicesService,
-        private readonly deleteService: DeleteServiceService
+        private readonly deleteService: DeleteServiceService,
+        private readonly addServiceToBarber: AddServiceToBarberService
     ) { }
 
     @Post()
@@ -38,5 +41,10 @@ export class ServiceController {
     @Delete(':id')
     async delete(@Param('id') id: string): Promise<void> {
         await this.deleteService.execute(id);
+    }
+
+    @Put()
+    async addService(@Body() dto: AddServiceToBarberDto): Promise<void> {
+        await this.addServiceToBarber.execute(dto.servicesId, dto.barberId);
     }
 }
