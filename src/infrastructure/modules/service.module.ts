@@ -9,11 +9,14 @@ import { FindAllServicesService } from "src/application/services/service/find-al
 import { DeleteServiceService } from "src/application/services/service/delete-service.service";
 import { ServiceRepositoryImpl } from "../persistence/repositories/service.repository.impl";
 import { BarbershopRepositoryImpl } from "../persistence/repositories/barbershop.repository.impl";
+import { AddServiceToBarberService } from "src/application/services/service/add-service-to-barber.service";
+import { BarberModel } from "../persistence/typeorm/models/barber.model";
+import { BarberRepositoryImpl } from '../persistence/repositories/barber.repository.impl';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([ServiceModel, BarbershopModel])],
+    imports: [TypeOrmModule.forFeature([ServiceModel, BarbershopModel, BarberModel])],
     controllers: [ServiceController],
-    providers: [CreateServiceService, FindServiceService, FindAllServicesService, DeleteServiceService, ServiceRepositoryImpl,
-        BarbershopRepositoryImpl]
+    providers: [CreateServiceService, FindServiceService, FindAllServicesService, DeleteServiceService, AddServiceToBarberService, ServiceRepositoryImpl,
+        BarberRepositoryImpl, BarbershopRepositoryImpl]
 })
 export class ServiceModule { }
