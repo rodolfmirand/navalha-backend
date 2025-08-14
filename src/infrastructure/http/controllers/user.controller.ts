@@ -6,9 +6,8 @@ import { CreateUserDto } from "../dtos/user/create-user.dto";
 import { UserMapper } from "src/infrastructure/persistence/mappers/user.mapper";
 import { UserResponseDTO } from "../dtos/user/user-response.dto";
 import { FindAllUsersService } from "src/application/services/user/find-all-users.service";
-import { UpdateUserDto } from "../dtos/user/user-update.dto";
+import { UpdateUserDto } from "../dtos/user/update-user.dto";
 import { UpdateUserService } from "src/application/services/user/update-user.service";
-import { STATUS_CODES } from 'http';
 
 @Controller('user')
 export class UserController {
