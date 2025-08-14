@@ -2,7 +2,7 @@ import { User } from 'src/domain/entities/user.entity';
 import { UserModel } from '../typeorm/models/user.model';
 import { CreateUserDto } from '../../http/dtos/user/create-user.dto';
 import { UserResponseDTO } from 'src/infrastructure/http/dtos/user/user-response.dto';
-import { UpdateUserDto } from 'src/infrastructure/http/dtos/user/user-update.dto';
+import { UpdateUserDto } from 'src/infrastructure/http/dtos/user/update-user.dto';
 export class UserMapper {
     public static toDomain(model: UserModel): User {
         const entity = new User();
@@ -20,6 +20,7 @@ export class UserMapper {
     public static toPersistence(entity: User): UserModel {
         const model = new UserModel();
 
+        model.id = entity.id;
         model.name = entity.name;
         model.email = entity.email;
         model.passwordHash = entity.password;
@@ -42,11 +43,12 @@ export class UserMapper {
 
     public static fromUpdateDTO(dto: UpdateUserDto): User {
         const entity = new User();
-        
+
         if (dto.name !== undefined) entity.name = dto.name;
         if (dto.email !== undefined) entity.email = dto.email;
         if (dto.phoneNumber !== undefined) entity.phoneNumber = dto.phoneNumber;
-        
+        if (dto.role !== undefined) entity.role = dto.role;
+
         return entity;
     }
 
