@@ -11,6 +11,7 @@ import { CustomerModel } from './infrastructure/persistence/typeorm/models/custo
 import { OperatingHoursModel } from './infrastructure/persistence/typeorm/models/operating-hours.model';
 import { BarbershopModule } from './infrastructure/modules/barbershop.module';
 import { CustomerModule } from './infrastructure/modules/customer.module';
+import { ServiceModule } from './infrastructure/modules/service.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -23,6 +24,6 @@ import { CustomerModule } from './infrastructure/modules/customer.module';
     entities: [UserModel, BarberModel, CustomerModel, BarbershopModel, ServiceModel, AppointmentModel, OperatingHoursModel],
     synchronize: true
   }),
-    UserModule, BarberModule, BarbershopModule, CustomerModule, ServiceModel]
+    UserModule, BarberModule, BarbershopModule, CustomerModule, ServiceModule]
 })
 export class AppModule { }
