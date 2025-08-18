@@ -1,3 +1,4 @@
+import { Transform, Type } from "class-transformer";
 import { IsDate, IsNotEmpty, IsUUID } from "class-validator";
 
 export class CreateAppointmentDto {
@@ -17,6 +18,7 @@ export class CreateAppointmentDto {
     @IsNotEmpty()
     serviceId: string;
 
+    @Type(() => Date)
     @IsDate()
     @IsNotEmpty()
     startTime: Date;
