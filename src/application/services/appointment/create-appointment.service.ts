@@ -1,19 +1,19 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Appointment } from "src/domain/entities/appointment.entity";
-import { IAppointmentRepository } from "src/domain/repositories/iappointment.repository";
-import { IBarberRepository } from "src/domain/repositories/ibarber.repository";
-import { IBarbershopRepository } from "src/domain/repositories/ibarbershop.repository";
-import { ICustomerRepository } from "src/domain/repositories/icustomer.repository";
-import { IServiceRepository } from "src/domain/repositories/iservice.repository";
+import { AppointmentRepositoryImpl } from "src/infrastructure/persistence/repositories/appointment.repository.impl";
+import { BarberRepositoryImpl } from "src/infrastructure/persistence/repositories/barber.repository.impl";
+import { BarbershopRepositoryImpl } from "src/infrastructure/persistence/repositories/barbershop.repository.impl";
+import { CustomerRepositoryImpl } from "src/infrastructure/persistence/repositories/customer.repository.impl";
+import { ServiceRepositoryImpl } from "src/infrastructure/persistence/repositories/service.repository.impl";
 
 @Injectable()
 export class CreateAppointmentService {
 
-    constructor(private readonly customerRepository: ICustomerRepository,
-        private readonly barberRepository: IBarberRepository,
-        private readonly barbershopRepository: IBarbershopRepository,
-        private readonly serviceRepository: IServiceRepository,
-        private readonly appointmentRepository: IAppointmentRepository
+    constructor(private readonly customerRepository: CustomerRepositoryImpl,
+        private readonly barberRepository: BarberRepositoryImpl,
+        private readonly barbershopRepository: BarbershopRepositoryImpl,
+        private readonly serviceRepository: ServiceRepositoryImpl,
+        private readonly appointmentRepository: AppointmentRepositoryImpl
     ) { }
 
     async execute(appointment: Appointment): Promise<Appointment> {
