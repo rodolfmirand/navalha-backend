@@ -4,18 +4,15 @@ export class Customer {
     id: string;
     userId: string;
 
-    preferences?: {
-        booking?: {
-            preferredBarberId?: string;
-            preferredServicesIds?: string[];
-            sendReminder: boolean;
-        };
-        service?: {
-            chatLevel: 'QUIET' | 'NORMAL' | 'CHATTY';
-            allergiesOrSensitivities?: string;
-            generalNotes?: string;
-        };
-    };
+    // booking
+    preferredBarberId: string;
+    preferredServicesId: string[];
+    sendReminder: boolean;
+
+    //service
+    chatLevel: 'QUIET' | 'NORMAL' | 'CHATTY';
+    allergiesOrSensitivities: string;
+    generalNotes: string;
 
     appointments: Appointment[];
 }
