@@ -6,13 +6,13 @@ export class CustomerResponseDto {
     readonly userId: string;
 
     // booking
-    readonly preferredBarberId?: string;
-    readonly preferredServicesId?: string[];
+    readonly preferredBarberId: string;
+    readonly preferredServicesId: string[];
     readonly sendReminder: boolean;
 
     // service
     readonly chatLevel: 'QUIET' | 'NORMAL' | 'CHATTY';
-    readonly allergiesOrSensitivities?: string;
+    readonly allergiesOrSensitivities: string;
     readonly generalNotes: string;
 
     @Type(() => AppointmentResponseDto)
