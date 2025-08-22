@@ -44,10 +44,10 @@ export class UserMapper {
     public static fromUpdateDTO(dto: UpdateUserDto): User {
         const entity = new User();
 
-        if (dto.name !== undefined) entity.name = dto.name;
-        if (dto.email !== undefined) entity.email = dto.email;
-        if (dto.phoneNumber !== undefined) entity.phoneNumber = dto.phoneNumber;
-        if (dto.role !== undefined) entity.role = dto.role;
+        if (dto.name) entity.name = dto.name;
+        if (dto.email) entity.email = dto.email;
+        if (dto.phoneNumber) entity.phoneNumber = dto.phoneNumber;
+        if (dto.role) entity.role = dto.role;
 
         return entity;
     }
