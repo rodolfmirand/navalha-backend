@@ -13,9 +13,18 @@ export class CustomerMapper {
     entity.id = model.id;
     entity.userId = model.userId;
 
-    if (model.preferences) {
-      entity.preferences = model.preferences;
+    if (model.preferredBarberId) {
+      entity.preferredBarberId = model.preferredBarberId;
     }
+
+    if (model.preferredServicesId) {
+      entity.preferredServicesId = model.preferredServicesId;
+    }
+
+    entity.sendReminder = model.sendReminder;
+    entity.chatLevel = model.chatLevel;
+    entity.allergiesOrSensitivities = model.allergiesOrSensitivities;
+    entity.generalNotes = model.generalNotes;
 
     if (model.appointments) {
       entity.appointments = model.appointments.map((appointmentModel) => AppointmentMapper.toDomain(appointmentModel));
@@ -27,32 +36,40 @@ export class CustomerMapper {
   public static toPersistence(entity: Customer): CustomerModel {
     const model = new CustomerModel();
 
-    model.id = entity.id;
     model.userId = entity.userId;
-
-    if (entity.preferences) {
-      model.preferences = entity.preferences;
-    }
+    model.preferredBarberId = entity.preferredBarberId;
+    model.preferredServicesId = entity.preferredServicesId;
+    model.sendReminder = entity.sendReminder;
+    model.chatLevel = entity.chatLevel;
+    model.allergiesOrSensitivities = entity.allergiesOrSensitivities;
+    model.generalNotes = entity.generalNotes;
 
     return model;
   }
 
   public static fromCreateDTO(dto: CreateCustomerDto): Customer {
-    const entity = new CustomerModel();
-
-    entity.userId = dto.userId;
-
-    if (dto.preferences) {
-      entity.preferences = dto.preferences;
+    return {
+      id: "",
+      userId: dto.userId,
+      preferredBarberId: dto.preferredBarberId,
+      preferredServicesId: dto.preferredServicesId,
+      sendReminder: dto.sendReminder,
+      allergiesOrSensitivities: dto.allergiesOrSensitivities,
+      chatLevel: dto.chatLevel,
+      generalNotes: dto.generalNotes,
+      appointments: []
     }
-
-    return entity;
   }
 
   public static fromUpdateDTO(dto: UpdateCustomerDto): Customer {
     const entity = new Customer();
 
-    entity.preferences = dto.preferences;
+    if (!dto.preferredBarberId) { entity.preferredBarberId = dto.preferredBarberId }
+    if (!dto.preferredServicesId) { entity.preferredServicesId = dto.preferredServicesId }
+    if (!dto.sendReminder) { entity.sendReminder = dto.sendReminder }
+    if (!dto.allergiesOrSensitivities) { entity.allergiesOrSensitivities = dto.allergiesOrSensitivities }
+    if (!dto.chatLevel) { entity.chatLevel = dto.chatLevel }
+    if (!dto.generalNotes) { entity.generalNotes }
 
     return entity;
   }
@@ -60,10 +77,16 @@ export class CustomerMapper {
   public static toDTO(entity: Customer): CustomerResponseDto {
     return {
       id: entity.id,
+      userId: entity.userId,
 
       appointments: entity.appointments?.map(AppointmentMapper.toDTO),
 
-      preferences: CustomerPreferencesMapper.toDTO(entity.preferences)
+      preferredBarberId: entity.preferredBarberId,
+      preferredServicesId: entity.preferredServicesId,
+      sendReminder: entity.sendReminder,
+      chatLevel: entity.chatLevel,
+      allergiesOrSensitivities: entity.allergiesOrSensitivities,
+      generalNotes: entity.generalNotes,
     }
   }
 }
