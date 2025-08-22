@@ -14,7 +14,7 @@ export class UpdateBarberService {
 
         existingBarber.specialties = barber.specialties;
 
-        if (barber.bio !== undefined) existingBarber.bio = barber.bio;
+        if (barber.bio) existingBarber.bio = barber.bio;
 
         return await this.repository.save(existingBarber);
     }

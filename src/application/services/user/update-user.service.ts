@@ -13,10 +13,10 @@ export class UpdateUserService {
             throw new NotFoundException('User not found.');
         }
 
-        if (user.name !== undefined) existingUser.name = user.name;
-        if (user.email !== undefined) existingUser.email = user.email;
-        if (user.phoneNumber !== undefined) existingUser.phoneNumber = user.phoneNumber;
-        if (user.role !== undefined) existingUser.role = user.role; 
+        if (user.name) existingUser.name = user.name;
+        if (user.email) existingUser.email = user.email;
+        if (user.phoneNumber) existingUser.phoneNumber = user.phoneNumber;
+        if (user.role) existingUser.role = user.role;
 
         return await this.repository.save(existingUser);
     }
