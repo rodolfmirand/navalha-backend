@@ -30,4 +30,8 @@ export class CustomerRepositoryImpl implements ICustomerRepository {
     async delete(id: string): Promise<void> {
         await this.repository.delete({ id });
     }
+
+    async update(customer: Customer): Promise<Customer> {
+        return await this.repository.save(customer);
+    }
 }
