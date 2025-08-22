@@ -5,5 +5,5 @@ export class ServicePreferencesResponseDto {
     readonly chatLevel: 'QUIET' | 'NORMAL' | 'CHATTY';
 
     readonly allergiesOrSensitivities?: string;
-    readonly generalNotes?: string;
+    readonly generalNotes: string;
 }
