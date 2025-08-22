@@ -1,14 +1,37 @@
-import { IsNotEmpty, IsOptional, IsString, IsUUID, MinLength, ValidateNested } from "class-validator";
-import { CustomerPreferencesDto } from "./customer-preferences/customer-preferences.dto";
-import { Type } from "class-transformer";
+import { IsBoolean, IsEnum, IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
 
 export class CreateCustomerDto {
     @IsUUID('4')
     @IsNotEmpty()
     userId: string;
 
-    @ValidateNested()
-    @Type(() => CustomerPreferencesDto)
+    // booking
     @IsOptional()
-    preferences?: CustomerPreferencesDto;
+    @IsUUID()
+    @IsNotEmpty()
+    preferredBarberId: string;
+
+    @IsOptional()
+    @IsNotEmpty()
+    @IsUUID('4', { each: true })
+    preferredServicesId: string[];
+
+    @IsBoolean()
+    @IsNotEmpty()
+    sendReminder: boolean;
+
+    // service
+    @IsEnum(['QUIET', 'NORMAL', 'CHATTY'])
+    @IsNotEmpty()
+    chatLevel: 'QUIET' | 'NORMAL' | 'CHATTY';
+
+    @IsOptional()
+    @IsString()
+    @IsNotEmpty()
+    allergiesOrSensitivities: string;
+
+    @IsOptional()
+    @IsString()
+    @IsNotEmpty()
+    generalNotes: string;
 }
