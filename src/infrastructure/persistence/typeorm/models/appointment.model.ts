@@ -1,5 +1,5 @@
 import { AppointmentStatus } from "src/domain/enums/appointment-status.enum";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { CustomerModel } from "./customer.model";
 import { BarberModel } from "./barber.model";
 import { BarbershopModel } from "./barbershop.model";
@@ -7,13 +7,13 @@ import { ServiceModel } from "./service.model";
 
 @Entity({ name: 'appointments' })
 export class AppointmentModel {
-    @PrimaryColumn('uuid')
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column({ type: 'enum', enum: AppointmentStatus, default: AppointmentStatus.SCHEDULED })
     status: AppointmentStatus;
 
-    @Column({ type: 'time with time zone' })
+    @Column({ type: 'date' })
     startTime: Date;
 
     @Column({ type: 'integer' })
