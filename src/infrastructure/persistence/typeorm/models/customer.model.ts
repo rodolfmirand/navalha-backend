@@ -1,10 +1,10 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { UserModel } from "./user.model";
 import { AppointmentModel } from "./appointment.model";
 
 @Entity({ name: 'customers' })
 export class CustomerModel {
-    @PrimaryColumn('uuid')
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column('uuid')
@@ -14,20 +14,24 @@ export class CustomerModel {
     @JoinColumn({ name: 'userId' })
     user: UserModel;
 
-    @Column({ type: 'jsonb', nullable: true })
-    preferences?: {
-        booking?: {
-            preferredBarberId?: string;
-            preferredServicesIds?: string[];
-            sendReminder: boolean;
-        };
-        service?: {
-            chatLevel: 'QUIET' | 'NORMAL' | 'CHATTY';
-            allergiesOrSensitivities?: string;
-            generalNotes?: string;
-        };
-    };
+    @Column('uuid', { nullable: true })
+    preferredBarberId: string;
 
-    @OneToMany(() => AppointmentModel, (appointment) => appointment.customerId)
+    @Column('uuid', { array: true, nullable: true })
+    preferredServicesId: string[];
+
+    @Column({ default: true })
+    sendReminder: boolean;
+
+    @Column({ type: 'enum', enum: ['QUIET', 'NORMAL', 'CHATTY'], default: 'NORMAL' })
+    chatLevel: 'QUIET' | 'NORMAL' | 'CHATTY';
+
+    @Column({ nullable: true })
+    allergiesOrSensitivities: string;
+
+    @Column({ nullable: true })
+    generalNotes: string;
+
+    @OneToMany(() => AppointmentModel, (appointment) => appointment.customer)
     appointments: AppointmentModel[];
 }
