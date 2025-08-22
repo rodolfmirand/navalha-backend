@@ -4,8 +4,8 @@ import { ServicePreferencesResponseDto } from "./preferences/service-preferences
 
 export class CustomerPreferencesResponseDto {
     @Type(() => BookingPreferencesResponseDto)
-    readonly booking?: BookingPreferencesResponseDto;
+    readonly booking: BookingPreferencesResponseDto;
 
     @Type(() => ServicePreferencesResponseDto)
-    readonly service?: ServicePreferencesResponseDto;
+    readonly service: ServicePreferencesResponseDto;
 }
