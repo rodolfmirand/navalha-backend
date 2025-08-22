@@ -12,8 +12,13 @@ export class UpdateCustomerService {
             throw new NotFoundException("Customer not found.");
         }
 
-        existingCustomer.preferences = customer.preferences;
+        if (!customer.preferredBarberId) { existingCustomer.preferredBarberId = customer.preferredBarberId }
+        if (!customer.preferredServicesId) { existingCustomer.preferredServicesId = customer.preferredServicesId }
+        if (!customer.sendReminder) { existingCustomer.sendReminder = customer.sendReminder }
+        if (!customer.allergiesOrSensitivities) { existingCustomer.allergiesOrSensitivities = customer.allergiesOrSensitivities }
+        if (!customer.chatLevel) { existingCustomer.chatLevel = customer.chatLevel }
+        if (!customer.generalNotes) { existingCustomer.generalNotes = customer.generalNotes }
 
-        return await this.repository.save(existingCustomer);
+        return await this.repository.update(existingCustomer);
     }
 }
