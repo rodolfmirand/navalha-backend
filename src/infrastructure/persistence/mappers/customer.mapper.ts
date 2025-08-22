@@ -64,12 +64,12 @@ export class CustomerMapper {
   public static fromUpdateDTO(dto: UpdateCustomerDto): Customer {
     const entity = new Customer();
 
-    if (!dto.preferredBarberId) { entity.preferredBarberId = dto.preferredBarberId }
-    if (!dto.preferredServicesId) { entity.preferredServicesId = dto.preferredServicesId }
-    if (!dto.sendReminder) { entity.sendReminder = dto.sendReminder }
-    if (!dto.allergiesOrSensitivities) { entity.allergiesOrSensitivities = dto.allergiesOrSensitivities }
-    if (!dto.chatLevel) { entity.chatLevel = dto.chatLevel }
-    if (!dto.generalNotes) { entity.generalNotes }
+    if (dto.preferredBarberId) { entity.preferredBarberId = dto.preferredBarberId }
+    if (dto.preferredServicesId) { entity.preferredServicesId = dto.preferredServicesId }
+    if (dto.sendReminder) { entity.sendReminder = dto.sendReminder }
+    if (dto.allergiesOrSensitivities) { entity.allergiesOrSensitivities = dto.allergiesOrSensitivities }
+    if (dto.chatLevel) { entity.chatLevel = dto.chatLevel }
+    if (dto.generalNotes) { entity.generalNotes }
 
     return entity;
   }
