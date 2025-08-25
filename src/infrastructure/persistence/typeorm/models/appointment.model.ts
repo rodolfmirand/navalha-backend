@@ -10,7 +10,8 @@ export class AppointmentModel {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type: 'enum', enum: AppointmentStatus, default: AppointmentStatus.SCHEDULED })
+    // alterar para enum quando for trocar para postgresql
+    @Column({ type: 'text', enum: AppointmentStatus, default: AppointmentStatus.SCHEDULED })
     status: AppointmentStatus;
 
     @Column({ type: 'date' })

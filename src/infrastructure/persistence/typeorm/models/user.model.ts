@@ -18,6 +18,7 @@ export class UserModel {
     @Column({ type: 'varchar', length: 20, nullable: true })
     phoneNumber: string;
 
-    @Column({ type: 'enum', enum: UserRole, default: UserRole.CUSTOMER })
+    // alterar para enum quando for trocar para postgresql
+    @Column({ type: 'text', enum: UserRole, default: UserRole.CUSTOMER })
     role: UserRole;
 }

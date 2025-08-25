@@ -19,6 +19,29 @@ export class BarbershopModel {
     @Column({ nullable: true })
     logoUrl?: string;
 
+    @Column({
+        type: 'text',
+        transformer: {
+            to: (value: any) => (value ? JSON.stringify(value) : null),
+            from: (value: string) => {
+                if (!value) return null;
+                try {
+                    return JSON.parse(value);
+                } catch {
+                    return value;
+                }
+            },
+        },
+    })
+    address: {
+        street: string;
+        city: string;
+        district: string;
+        number: string;
+        state: string;
+    };
+
+    /*
     @Column({ type: 'jsonb' })
     address: {
         street: string;
@@ -27,6 +50,7 @@ export class BarbershopModel {
         number: string;
         state: string;
     };
+    */
 
     @Column()
     contactPhone: string;

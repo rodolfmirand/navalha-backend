@@ -7,7 +7,8 @@ export class OperatingHoursModel {
     @PrimaryColumn('uuid')
     id: string;
 
-    @Column({type: 'enum', enum: DayOfWeek})
+    // alterar para enum quando for trocar para postgresql
+    @Column({type: 'text', enum: DayOfWeek})
     dayOfWeek: DayOfWeek;
 
     @Column({ type: 'time' })

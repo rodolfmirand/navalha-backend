@@ -23,7 +23,8 @@ export class CustomerModel {
     @Column({ default: true })
     sendReminder: boolean;
 
-    @Column({ type: 'enum', enum: ['QUIET', 'NORMAL', 'CHATTY'], default: 'NORMAL' })
+    // alterar para enum quando for trocar para postgresql
+    @Column({ type: 'text', enum: ['QUIET', 'NORMAL', 'CHATTY'], default: 'NORMAL' })
     chatLevel: 'QUIET' | 'NORMAL' | 'CHATTY';
 
     @Column({ nullable: true })
