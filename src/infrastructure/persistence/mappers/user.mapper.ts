@@ -37,6 +37,7 @@ export class UserMapper {
         entity.email = dto.email;
         entity.phoneNumber = dto.phoneNumber;
         entity.password = dto.password;
+        if (dto.role) entity.role = dto.role;
 
         return entity;
     }
