@@ -2,11 +2,13 @@ import { Injectable } from "@nestjs/common";
 import { User } from "src/domain/entities/user.entity";
 import * as bcrypt from 'bcrypt';
 import { UserRepositoryImpl } from "src/infrastructure/persistence/repositories/user.repository.impl";
+import { CustomerRepositoryImpl } from '../../../infrastructure/persistence/repositories/customer.repository.impl';
+import { Customer } from "src/domain/entities/customer.entity";
 
 @Injectable()
 export class CreateUserService {
 
-    constructor(private readonly repository: UserRepositoryImpl) { }
+    constructor(private readonly repository: UserRepositoryImpl, private readonly customerRepository: CustomerRepositoryImpl) { }
 
     async execute(user: User): Promise<User> {
         const emailInUse = await this.repository.findByEmail(user.email);
@@ -24,6 +26,14 @@ export class CreateUserService {
 
         user.password = hashedPassword;
 
-        return await this.repository.save(user);
+        const savedUser = await this.repository.save(user);
+
+        if (!user.role) {
+            const customer = new Customer();
+            customer.userId = savedUser.id;
+            await this.customerRepository.save(customer);
+        }
+
+        return savedUser;
     }
 }
