@@ -16,5 +16,6 @@ import { UserRepositoryImpl } from "../persistence/repositories/user.repository.
     controllers: [CustomerController],
     providers: [CreateCustomerService, FindCustomerService, FindAllCUstomersService, DeleteCustomerService, UpdateCustomerService, CustomerRepositoryImpl,
         UserRepositoryImpl],
+    exports: [CustomerRepositoryImpl]
 })
 export class CustomerModule { }

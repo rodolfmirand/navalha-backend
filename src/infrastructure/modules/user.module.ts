@@ -8,11 +8,14 @@ import { DeleteUserService } from "src/application/services/user/delete-user.ser
 import { UpdateUserService } from "src/application/services/user/update-user.service";
 import { UserRepositoryImpl } from "../persistence/repositories/user.repository.impl";
 import { UserModel } from "../persistence/typeorm/models/user.model";
+import { CustomerRepositoryImpl } from "../persistence/repositories/customer.repository.impl";
+import { CustomerModel } from "../persistence/typeorm/models/customer.model";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([UserModel])],
+    imports: [TypeOrmModule.forFeature([UserModel, CustomerModel])],
     controllers: [UserController],
-    providers: [CreateUserService, FindUserService, FindAllUsersService, DeleteUserService, UpdateUserService, UserRepositoryImpl],
+    providers: [CreateUserService, FindUserService, FindAllUsersService, DeleteUserService, UpdateUserService, UserRepositoryImpl,
+        CustomerRepositoryImpl],
     exports: [UserRepositoryImpl]
 })
 export class UserModule { }
