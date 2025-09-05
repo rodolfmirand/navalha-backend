@@ -1,14 +1,21 @@
 import { Controller, HttpCode, Post, Request, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
-import { UserMapper } from "src/infrastructure/persistence/mappers/user.mapper";
+import { AuthService } from '../../../application/services/auth/auth.service';
+import { LocalAuthGuard } from "src/application/services/auth/guards/local-auth.guard";
 
 @Controller('auth')
 export class AuthController {
 
+    constructor(private readonly AuthService: AuthService) { }
+
     @HttpCode(200)
-    @UseGuards(AuthGuard('local'))
+    @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(@Request() req) {
-        return UserMapper.toDTO(req.user);
+        const token = this.AuthService.login(req.user.id)
+        return {
+            id: req.user.id,
+            token
+        }
     }
 }
