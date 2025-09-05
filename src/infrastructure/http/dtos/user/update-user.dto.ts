@@ -13,6 +13,11 @@ export class UpdateUserDto {
     email: string;
 
     @IsOptional()
+    @IsString()
+    @IsNotEmpty()
+    username: string;
+
+    @IsOptional()
     @IsPhoneNumber('BR')
     @IsNotEmpty()
     phoneNumber: string;
