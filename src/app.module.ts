@@ -13,6 +13,7 @@ import { BarbershopModule } from './infrastructure/modules/barbershop.module';
 import { CustomerModule } from './infrastructure/modules/customer.module';
 import { ServiceModule } from './infrastructure/modules/service.module';
 import { AppointmentModule } from './infrastructure/modules/appointment.module';
+import { AuthModule } from './infrastructure/modules/auth.module';
 /*
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -50,6 +51,7 @@ import { AppointmentModule } from './infrastructure/modules/appointment.module';
     CustomerModule,
     ServiceModule,
     AppointmentModule,
+    AuthModule
   ],
 })
 export class AppModule { }
