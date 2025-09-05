@@ -1,13 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { CreateBarberService } from "src/application/services/barber/create-barber.service";
-import { DeleteBarberService } from "src/application/services/barber/delete-barber.service";
-import { FindAllBarbersService } from "src/application/services/barber/find-all-barbers.service";
-import { FindBarberService } from "src/application/services/barber/find-barber.service";
 import { CreateBarberDto } from "../dtos/barber/create-barber.dto";
 import { BarberResponseDto } from "../dtos/barber/barber-response.dto";
 import { BarberMapper } from "src/infrastructure/persistence/mappers/barber.mapper";
 import { UpdateBarberDto } from "../dtos/barber/update-barber.dto";
 import { UpdateBarberService } from "src/application/services/barber/update-barber.service";
+import { DeleteBarberService } from "src/application/services/barber/delete-barber.service";
+import { FindAllBarbersService } from "src/application/services/barber/find-all-barbers.service";
+import { FindBarberService } from "src/application/services/barber/find-barber.service";
 
 @Controller('barber')
 export class BarberController {
