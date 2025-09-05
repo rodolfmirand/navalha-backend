@@ -12,7 +12,7 @@ export class BarberModel {
     @Column('uuid')
     userId: string;
 
-    @OneToOne(() => UserModel)
+    @OneToOne(() => UserModel, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'userId' })
     user: UserModel;
 
