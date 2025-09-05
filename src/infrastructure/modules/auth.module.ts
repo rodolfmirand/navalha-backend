@@ -3,15 +3,22 @@ import { AuthController } from "../http/controllers/auth.controller";
 import { UserRepositoryImpl } from "../persistence/repositories/user.repository.impl";
 import { AuthService } from '../../application/services/auth/auth.service';
 import { LocalStrategy } from "src/application/services/auth/strategies/local.strategy";
-import { Type } from "class-transformer";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserModel } from "../persistence/typeorm/models/user.model";
+import { JwtModule } from "@nestjs/jwt";
+import jwtConfig from "src/application/config/jwt.config";
+import { ConfigModule } from "@nestjs/config";
+import { JwtStrategy } from "src/application/services/auth/strategies/jwt.strategy";
 
 @Module(
     {
-        imports: [TypeOrmModule.forFeature([UserModel])],
+        imports: [
+            TypeOrmModule.forFeature([UserModel]),
+            JwtModule.registerAsync(jwtConfig.asProvider()),
+            ConfigModule.forFeature(jwtConfig)
+        ],
         controllers: [AuthController],
-        providers: [AuthService, UserRepositoryImpl, LocalStrategy],
+        providers: [AuthService, UserRepositoryImpl, LocalStrategy, JwtStrategy],
         exports: []
     }
 )
