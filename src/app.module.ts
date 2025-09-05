@@ -14,6 +14,7 @@ import { CustomerModule } from './infrastructure/modules/customer.module';
 import { ServiceModule } from './infrastructure/modules/service.module';
 import { AppointmentModule } from './infrastructure/modules/appointment.module';
 import { AuthModule } from './infrastructure/modules/auth.module';
+import { ConfigModule } from '@nestjs/config';
 /*
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -31,6 +32,7 @@ import { AuthModule } from './infrastructure/modules/auth.module';
     */
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: ':memory:', // usa banco em memória
