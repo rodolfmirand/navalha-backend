@@ -6,9 +6,14 @@ export class CreateUserDto {
     @IsNotEmpty()
     readonly name: string;
 
-    @IsEmail()
+    @IsEmail({}, { message: 'Invalid email format.' })
     @IsNotEmpty()
     readonly email: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @MinLength(5, { message: 'Username must have at least 5 characters.' })
+    readonly username: string;
 
     @IsPhoneNumber('BR')
     @IsNotEmpty()
