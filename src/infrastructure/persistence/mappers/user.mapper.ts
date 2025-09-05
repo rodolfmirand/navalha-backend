@@ -3,6 +3,7 @@ import { UserModel } from '../typeorm/models/user.model';
 import { CreateUserDto } from '../../http/dtos/user/create-user.dto';
 import { UserResponseDTO } from 'src/infrastructure/http/dtos/user/user-response.dto';
 import { UpdateUserDto } from 'src/infrastructure/http/dtos/user/update-user.dto';
+
 export class UserMapper {
     public static toDomain(model: UserModel): User {
         const entity = new User();
@@ -10,6 +11,7 @@ export class UserMapper {
         entity.id = model.id;
         entity.name = model.name;
         entity.email = model.email;
+        entity.username = model.username;
         entity.password = model.passwordHash;
         entity.phoneNumber = model.phoneNumber;
         entity.role = model.role;
@@ -23,6 +25,7 @@ export class UserMapper {
         model.id = entity.id;
         model.name = entity.name;
         model.email = entity.email;
+        model.username = entity.username;
         model.passwordHash = entity.password;
         model.phoneNumber = entity.phoneNumber;
         model.role = entity.role;
@@ -35,6 +38,7 @@ export class UserMapper {
 
         entity.name = dto.name;
         entity.email = dto.email;
+        entity.username = dto.username;
         entity.phoneNumber = dto.phoneNumber;
         entity.password = dto.password;
         if (dto.role) entity.role = dto.role;
@@ -47,6 +51,7 @@ export class UserMapper {
 
         if (dto.name) entity.name = dto.name;
         if (dto.email) entity.email = dto.email;
+        if (dto.username) entity.username = dto.username;
         if (dto.phoneNumber) entity.phoneNumber = dto.phoneNumber;
         if (dto.role) entity.role = dto.role;
 
@@ -58,6 +63,7 @@ export class UserMapper {
             id: entity.id,
             name: entity.name,
             email: entity.email,
+            username: entity.username,
             phoneNumber: entity.phoneNumber,
             role: entity.role
         }
