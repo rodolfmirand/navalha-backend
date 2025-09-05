@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, NotFoundException, HttpException, HttpStatus } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, NotFoundException, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { CreateUserService } from "src/application/services/user/create-user.service";
 import { DeleteUserService } from "src/application/services/user/delete-user.service";
 import { FindUserService } from "src/application/services/user/find-user.service";
@@ -8,6 +8,7 @@ import { UserResponseDTO } from "../dtos/user/user-response.dto";
 import { FindAllUsersService } from "src/application/services/user/find-all-users.service";
 import { UpdateUserDto } from "../dtos/user/update-user.dto";
 import { UpdateUserService } from "src/application/services/user/update-user.service";
+import { JwtAuthGuard } from 'src/application/services/auth/guards/jwt-auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -34,6 +35,7 @@ export class UserController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
     async find(@Param('id') id: string): Promise<UserResponseDTO> {
         const user = await this.findUser.execute(id);
