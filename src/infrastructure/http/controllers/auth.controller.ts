@@ -12,10 +12,12 @@ export class AuthController {
     @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(@Request() req) {
-        const token = this.AuthService.login(req.user.id)
-        return {
-            id: req.user.id,
-            token
-        }
+        return this.AuthService.login(req.user.id);
+    }
+
+    @Post('refresh')
+    @UseGuards(AuthGuard('refresh-jwt'))
+    async refresh(@Request() req) {
+        return this.AuthService.refreshToken(req.user.id);
     }
 }
