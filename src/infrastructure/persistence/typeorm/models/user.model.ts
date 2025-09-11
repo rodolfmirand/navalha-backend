@@ -18,7 +18,7 @@ export class UserModel {
     @Column()
     password: string;
 
-    @Column()
+    @Column({ nullable: true }) 
     hashedRefreshToken: string;
 
     @Column({ type: 'varchar', length: 20, nullable: true })
