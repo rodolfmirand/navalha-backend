@@ -7,6 +7,7 @@ import { JwtService } from "@nestjs/jwt";
 import { AuthJwtPayload } from "./types/auth-jwtPayload.type";
 import refreshJwtConfig from "src/application/config/refresh-jwt.config";
 import { ConfigType } from "@nestjs/config";
+import * as argon from 'argon2';
 
 @Injectable()
 export class AuthService {
@@ -36,24 +37,59 @@ export class AuthService {
         return user;
     }
 
-    login(userId: UUID) {
+    async login(userId: UUID) {
         const payload: AuthJwtPayload = { sub: userId }
-        const token = this.jwtService.sign(payload);
-        const refreshToken = this.jwtService.sign(payload, this.refreshJwtOptions);
+
+        const { accessToken, refreshToken } = await this.generateTokens(userId);
+
+        const hashedRefreshToken = await argon.hash(refreshToken);
+
+        await this.userRepository.updateRefreshToken(userId, hashedRefreshToken);
 
         return {
             userId: userId,
-            token, refreshToken
+            accessToken, refreshToken
         };
     }
 
-    refreshToken(userId: UUID) {
+    async generateTokens(userId: UUID) {
         const payload: AuthJwtPayload = { sub: userId }
-        const token = this.jwtService.sign(payload);
-        
+        const [accessToken, refreshToken] = await Promise.all([
+            this.jwtService.signAsync(payload),
+            this.jwtService.signAsync(payload, this.refreshJwtOptions)
+        ]);
+
         return {
             userId: userId,
-            token
+            accessToken,
+            refreshToken
+        }
+    }
+
+    async refreshToken(userId: UUID) {
+        const payload: AuthJwtPayload = { sub: userId }
+
+        const { accessToken, refreshToken } = await this.generateTokens(userId);
+
+        const hashedRefreshToken = await argon.hash(refreshToken);
+
+        await this.userRepository.updateRefreshToken(userId, hashedRefreshToken);
+
+        return {
+            userId: userId,
+            accessToken, refreshToken
+        };
+    }
+
+    async validateRefreshToken(userId: UUID, refreshToken: string) {
+        const user = await this.userRepository.findById(userId);
+        if (!user || !user.hashedRefreshToken) {
+            throw new UnauthorizedException('Invalid refresh token');
+        }
+
+        const refreshTokenMatches = await argon.verify(user.hashedRefreshToken, refreshToken);
+        if (!refreshTokenMatches) {
+            throw new UnauthorizedException('Access Denied');
         }
     }
 }
