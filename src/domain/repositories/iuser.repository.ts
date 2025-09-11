@@ -1,3 +1,4 @@
+import { UUID } from 'crypto';
 import { User } from '../entities/user.entity';
 
 export const IUserRepository = Symbol('IUserRepository');
@@ -10,4 +11,5 @@ export interface IUserRepository {
     findByPhoneNumber(phoneNumber: string): Promise<User | null>;
     findAll(): Promise<User[]>;
     delete(id: string): Promise<void>;
+    updateRefreshToken(id: UUID, hashedRefreshToken: string): Promise<void>;
 }
