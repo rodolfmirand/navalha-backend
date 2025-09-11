@@ -29,6 +29,7 @@ export class UserMapper {
         model.password = entity.password;
         model.phoneNumber = entity.phoneNumber;
         model.role = entity.role;
+        model.hashedRefreshToken = entity.hashedRefreshToken;
 
         return model;
     }
