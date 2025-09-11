@@ -38,8 +38,6 @@ export class AuthService {
     }
 
     async login(userId: UUID) {
-        const payload: AuthJwtPayload = { sub: userId }
-
         const { accessToken, refreshToken } = await this.generateTokens(userId);
 
         const hashedRefreshToken = await argon.hash(refreshToken);
@@ -67,8 +65,6 @@ export class AuthService {
     }
 
     async refreshToken(userId: UUID) {
-        const payload: AuthJwtPayload = { sub: userId }
-
         const { accessToken, refreshToken } = await this.generateTokens(userId);
 
         const hashedRefreshToken = await argon.hash(refreshToken);
@@ -76,20 +72,32 @@ export class AuthService {
         await this.userRepository.updateRefreshToken(userId, hashedRefreshToken);
 
         return {
-            userId: userId,
-            accessToken, refreshToken
+            id: userId,
+            accessToken,
+            refreshToken,
         };
     }
 
     async validateRefreshToken(userId: UUID, refreshToken: string) {
         const user = await this.userRepository.findById(userId);
-        if (!user || !user.hashedRefreshToken) {
-            throw new UnauthorizedException('Invalid refresh token');
+
+        if (!user) {
+            throw new NotFoundException('User not found.');
+        }
+
+        if (!user.hashedRefreshToken) {
+            throw new UnauthorizedException('Invalid refresh token.');
         }
 
         const refreshTokenMatches = await argon.verify(user.hashedRefreshToken, refreshToken);
         if (!refreshTokenMatches) {
-            throw new UnauthorizedException('Access Denied');
+            throw new UnauthorizedException('Access Denied.');
         }
+
+        return { id: userId };
+    }
+
+    async signOut(userId: UUID) {
+        await this.userRepository.updateRefreshToken(userId, "");
     }
 }
