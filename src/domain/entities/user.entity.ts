@@ -8,4 +8,5 @@ export class User {
     password: string;
     phoneNumber: string;
     role: UserRole;
+    hashedRefreshToken: string;
 }
