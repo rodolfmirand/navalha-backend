@@ -43,6 +43,7 @@ export class UserController {
     }
 
     @Get()
+    @UseGuards(JwtAuthGuard)
     async findAll(): Promise<UserResponseDTO[]> {
         const users = await this.findAllUsers.execute();
         return users.map(UserMapper.toDTO);
