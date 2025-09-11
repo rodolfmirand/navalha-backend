@@ -12,7 +12,7 @@ export class UserMapper {
         entity.name = model.name;
         entity.email = model.email;
         entity.username = model.username;
-        entity.password = model.passwordHash;
+        entity.password = model.password;
         entity.phoneNumber = model.phoneNumber;
         entity.role = model.role;
 
@@ -26,7 +26,7 @@ export class UserMapper {
         model.name = entity.name;
         model.email = entity.email;
         model.username = entity.username;
-        model.passwordHash = entity.password;
+        model.password = entity.password;
         model.phoneNumber = entity.phoneNumber;
         model.role = entity.role;
 

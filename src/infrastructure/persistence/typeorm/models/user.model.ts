@@ -16,7 +16,7 @@ export class UserModel {
     username: string;
 
     @Column()
-    passwordHash: string;
+    password: string;
 
     @Column()
     hashedRefreshToken: string;
