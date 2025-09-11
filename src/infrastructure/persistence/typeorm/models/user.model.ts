@@ -18,6 +18,9 @@ export class UserModel {
     @Column()
     passwordHash: string;
 
+    @Column()
+    hashedRefreshToken: string;
+
     @Column({ type: 'varchar', length: 20, nullable: true })
     phoneNumber: string;
 
