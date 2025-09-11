@@ -5,6 +5,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { UserModel } from '../typeorm/models/user.model';
 import { Repository } from 'typeorm';
 import { UserMapper } from '../mappers/user.mapper';
+import { UUID } from 'crypto';
 
 @Injectable()
 export class UserRepositoryImpl implements IUserRepository {
@@ -44,5 +45,9 @@ export class UserRepositoryImpl implements IUserRepository {
 
     async delete(id: string): Promise<void> {
         await this.repository.delete({ id });
+    }
+
+    async updateRefreshToken(id: UUID, hashedRefreshToken: string): Promise<void> {
+        await this.repository.update({ id }, { hashedRefreshToken });
     }
 }
