@@ -17,6 +17,19 @@ import { UpdateBarberService } from "src/application/services/barber/update-barb
     imports: [TypeOrmModule.forFeature([BarberModel, UserModel, BarbershopModel])],
     controllers: [BarberController],
     providers: [CreateBarberService, FindBarberService, FindAllBarbersService, DeleteBarberService, UpdateBarberService, BarberRepositoryImpl,
-        UserRepositoryImpl, BarbershopRepositoryImpl]
+        UserRepositoryImpl, BarbershopRepositoryImpl,
+        {
+            provide: 'BarberRepository',
+            useExisting: BarberRepositoryImpl
+        },
+        {
+            provide: 'UserRepository',
+            useExisting: UserRepositoryImpl
+        },
+        {
+            provide: 'BarbershopRepository',
+            useExisting: BarbershopRepositoryImpl
+        }
+    ]
 })
 export class BarberModule { }

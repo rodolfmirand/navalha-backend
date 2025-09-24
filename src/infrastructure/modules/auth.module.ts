@@ -21,7 +21,12 @@ import { RefreshJwtStrategy } from "src/application/services/auth/strategies/ref
             ConfigModule.forFeature(refreshJwtConfig)
         ],
         controllers: [AuthController],
-        providers: [AuthService, UserRepositoryImpl, LocalStrategy, JwtStrategy, RefreshJwtStrategy],
+        providers: [AuthService, UserRepositoryImpl, LocalStrategy, JwtStrategy, RefreshJwtStrategy,
+            {
+                provide: 'UserRepository',
+                useExisting: UserRepositoryImpl
+            }
+        ],
         exports: []
     }
 )

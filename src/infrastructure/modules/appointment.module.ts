@@ -20,7 +20,27 @@ import { AppointmentRepositoryImpl } from "../persistence/repositories/appointme
 @Module({
     imports: [TypeOrmModule.forFeature([AppointmentModel, BarberModel, CustomerModel, ServiceModel, BarbershopModel])],
     controllers: [AppointmentController],
-    providers: [CreateAppointmentService, FindAppointmentService, FindAllAppointmentsService, DeleteAppointmentService, UpdateAppointmentService, AppointmentRepositoryImpl, CustomerRepositoryImpl, BarberRepositoryImpl, BarbershopRepositoryImpl, ServiceRepositoryImpl
+    providers: [CreateAppointmentService, FindAppointmentService, FindAllAppointmentsService, DeleteAppointmentService, UpdateAppointmentService, AppointmentRepositoryImpl, CustomerRepositoryImpl, BarberRepositoryImpl, BarbershopRepositoryImpl, ServiceRepositoryImpl,
+        {
+            provide: 'AppointmentRepository',
+            useClass: AppointmentRepositoryImpl
+        },
+        {
+            provide: 'CustomerRepository',
+            useClass: CustomerRepositoryImpl
+        },
+        {
+            provide: 'BarberRepository',
+            useClass: BarberRepositoryImpl
+        },
+        {
+            provide: 'BarbershopRepository',
+            useClass: BarbershopRepositoryImpl
+        },
+        {
+            provide: 'ServiceRepository',
+            useClass: ServiceRepositoryImpl
+        }
     ]
 })
 export class AppointmentModule { }

@@ -15,7 +15,15 @@ import { UserRepositoryImpl } from "../persistence/repositories/user.repository.
     imports: [TypeOrmModule.forFeature([BarbershopModel, UserModel, BarberModel])],
     controllers: [BarbershopController],
     providers: [CreateBarbershopService, FindBarbershopService, FindAllBarbershopsService, DeleteBarbershopService, BarbershopRepositoryImpl,
-        UserRepositoryImpl
+        UserRepositoryImpl,
+        {
+            provide: 'BarbershopRepository',
+            useClass: BarbershopRepositoryImpl
+        },
+        {
+            provide: 'UserRepository',
+            useClass: UserRepositoryImpl
+        }
     ],
     exports: [BarbershopRepositoryImpl]
 })

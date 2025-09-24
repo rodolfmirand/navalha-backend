@@ -17,6 +17,18 @@ import { BarberRepositoryImpl } from '../persistence/repositories/barber.reposit
     imports: [TypeOrmModule.forFeature([ServiceModel, BarbershopModel, BarberModel])],
     controllers: [ServiceController],
     providers: [CreateServiceService, FindServiceService, FindAllServicesService, DeleteServiceService, AddServiceToBarberService, ServiceRepositoryImpl,
-        BarberRepositoryImpl, BarbershopRepositoryImpl]
+        BarberRepositoryImpl, BarbershopRepositoryImpl,
+        {
+            provide: 'ServiceRepository',
+            useClass: ServiceRepositoryImpl
+        },
+        {
+            provide: 'BarbershopRepository',
+            useClass: BarbershopRepositoryImpl
+        },
+        {
+            provide: 'BarberRepository',
+            useClass: BarberRepositoryImpl
+        }]
 })
 export class ServiceModule { }

@@ -15,7 +15,15 @@ import { UserRepositoryImpl } from "../persistence/repositories/user.repository.
     imports: [TypeOrmModule.forFeature([CustomerModel, UserModel])],
     controllers: [CustomerController],
     providers: [CreateCustomerService, FindCustomerService, FindAllCUstomersService, DeleteCustomerService, UpdateCustomerService, CustomerRepositoryImpl,
-        UserRepositoryImpl],
+        UserRepositoryImpl,
+        {
+            provide: 'CustomerRepository',
+            useClass: CustomerRepositoryImpl
+        },
+        {
+            provide: 'UserRepository',
+            useClass: UserRepositoryImpl
+        }],
     exports: [CustomerRepositoryImpl]
 })
 export class CustomerModule { }
