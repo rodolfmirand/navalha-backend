@@ -1,11 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { Barbershop } from "src/domain/entities/barbershop.entity";
-import { BarbershopRepositoryImpl } from "src/infrastructure/persistence/repositories/barbershop.repository.impl";
+import { IBarbershopRepository } from "src/domain/repositories/ibarbershop.repository";
 
 @Injectable()
 export class FindAllBarbershopsService {
 
-    constructor(private readonly repository: BarbershopRepositoryImpl) { }
+    constructor(@Inject('BarbershopRepository') private readonly repository: IBarbershopRepository) { }
 
     async execute(): Promise<Barbershop[]> {
         return await this.repository.findAll();

@@ -1,16 +1,16 @@
-import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { Barber } from "src/domain/entities/barber.entity";
 import { UserRole } from "src/domain/enums/user-role.enum";
-import { BarberRepositoryImpl } from "src/infrastructure/persistence/repositories/barber.repository.impl";
-import { BarbershopRepositoryImpl } from "src/infrastructure/persistence/repositories/barbershop.repository.impl";
-import { UserRepositoryImpl } from "src/infrastructure/persistence/repositories/user.repository.impl";
+import { IBarberRepository } from "src/domain/repositories/ibarber.repository";
+import { IBarbershopRepository } from "src/domain/repositories/ibarbershop.repository";
+import { IUserRepository } from "src/domain/repositories/iuser.repository";
 
 @Injectable()
 export class CreateBarberService {
 
-    constructor(private readonly barberRepository: BarberRepositoryImpl,
-        private readonly userRepository: UserRepositoryImpl,
-        private readonly barbershopRepository: BarbershopRepositoryImpl) { }
+    constructor(@Inject('BarberRepository') private readonly barberRepository: IBarberRepository,
+        @Inject('UserRepository') private readonly userRepository: IUserRepository,
+        @Inject('BarbershopRepository') private readonly barbershopRepository: IBarbershopRepository) { }
 
     async execute(barber: Barber): Promise<Barber> {
         const user = await this.userRepository.findById(barber.userId);

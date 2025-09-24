@@ -1,11 +1,11 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { Appointment } from "src/domain/entities/appointment.entity";
-import { AppointmentRepositoryImpl } from "src/infrastructure/persistence/repositories/appointment.repository.impl";
+import { IAppointmentRepository } from "src/domain/repositories/iappointment.repository";
 
 @Injectable()
 export class FindAppointmentService {
 
-    constructor(private readonly repository: AppointmentRepositoryImpl) { }
+    constructor(@Inject('AppointmentRepository') private readonly repository: IAppointmentRepository) { }
 
     async execute(id: string): Promise<Appointment> {
         const appointment = await this.repository.findById(id);

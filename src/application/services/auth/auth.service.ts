@@ -8,12 +8,13 @@ import { AuthJwtPayload } from "./types/auth-jwtPayload.type";
 import refreshJwtConfig from "src/application/config/refresh-jwt.config";
 import { ConfigType } from "@nestjs/config";
 import * as argon from 'argon2';
+import { IUserRepository } from "src/domain/repositories/iuser.repository";
 
 @Injectable()
 export class AuthService {
 
     constructor(
-        private readonly userRepository: UserRepositoryImpl,
+        @Inject('UserRepository') private readonly userRepository: IUserRepository,
         private readonly jwtService: JwtService,
         @Inject(refreshJwtConfig.KEY) private readonly refreshJwtOptions: ConfigType<typeof refreshJwtConfig>,
     ) { }

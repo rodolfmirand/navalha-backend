@@ -1,19 +1,19 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { Appointment } from "src/domain/entities/appointment.entity";
-import { AppointmentRepositoryImpl } from "src/infrastructure/persistence/repositories/appointment.repository.impl";
-import { BarberRepositoryImpl } from "src/infrastructure/persistence/repositories/barber.repository.impl";
-import { BarbershopRepositoryImpl } from "src/infrastructure/persistence/repositories/barbershop.repository.impl";
-import { CustomerRepositoryImpl } from "src/infrastructure/persistence/repositories/customer.repository.impl";
-import { ServiceRepositoryImpl } from "src/infrastructure/persistence/repositories/service.repository.impl";
+import { IAppointmentRepository } from "src/domain/repositories/iappointment.repository";
+import { IBarberRepository } from "src/domain/repositories/ibarber.repository";
+import { IBarbershopRepository } from "src/domain/repositories/ibarbershop.repository";
+import { ICustomerRepository } from "src/domain/repositories/icustomer.repository";
+import { IServiceRepository } from "src/domain/repositories/iservice.repository";
 
 @Injectable()
 export class CreateAppointmentService {
 
-    constructor(private readonly customerRepository: CustomerRepositoryImpl,
-        private readonly barberRepository: BarberRepositoryImpl,
-        private readonly barbershopRepository: BarbershopRepositoryImpl,
-        private readonly serviceRepository: ServiceRepositoryImpl,
-        private readonly appointmentRepository: AppointmentRepositoryImpl
+    constructor(@Inject('CustomerRepository') private readonly customerRepository: ICustomerRepository,
+        @Inject('BarberRepository') private readonly barberRepository: IBarberRepository,
+        @Inject('BarbershopRepository') private readonly barbershopRepository: IBarbershopRepository,
+        @Inject('ServiceRepository') private readonly serviceRepository: IServiceRepository,
+        @Inject('AppointmentRepository') private readonly appointmentRepository: IAppointmentRepository
     ) { }
 
     async execute(appointment: Appointment): Promise<Appointment> {

@@ -1,10 +1,11 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { AppointmentStatus } from "src/domain/enums/appointment-status.enum";
-import { AppointmentRepositoryImpl } from "src/infrastructure/persistence/repositories/appointment.repository.impl";
+import { IAppointmentRepository } from "src/domain/repositories/iappointment.repository";
 
 @Injectable()
 export class UpdateAppointmentService {
-    constructor(private readonly repository: AppointmentRepositoryImpl) { }
+
+    constructor(@Inject('AppointmentRepository') private readonly repository: IAppointmentRepository) { }
 
     async execute(id: string, status: AppointmentStatus): Promise<void> {
         const appointment = await this.repository.findById(id);

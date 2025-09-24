@@ -1,10 +1,10 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { BarbershopRepositoryImpl } from "src/infrastructure/persistence/repositories/barbershop.repository.impl";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import { IBarbershopRepository } from "src/domain/repositories/ibarbershop.repository";
 
 @Injectable()
 export class DeleteBarbershopService {
 
-    constructor(private readonly repository: BarbershopRepositoryImpl) { }
+    constructor(@Inject('BarbershopRepository') private readonly repository: IBarbershopRepository) { }
 
     async execute(id: string): Promise<void> {
         const barbershop = await this.repository.findById(id);

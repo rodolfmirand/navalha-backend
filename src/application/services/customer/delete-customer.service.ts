@@ -1,10 +1,11 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import { ICustomerRepository } from "src/domain/repositories/icustomer.repository";
 import { CustomerRepositoryImpl } from "src/infrastructure/persistence/repositories/customer.repository.impl";
 
 @Injectable()
 export class DeleteCustomerService {
 
-    constructor(private readonly repository: CustomerRepositoryImpl) { }
+    constructor(@Inject('CustomerRepository') private readonly repository: ICustomerRepository) { }
 
     async execute(id: string): Promise<void> {
         const customer = await this.repository.findById(id);

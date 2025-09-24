@@ -1,14 +1,14 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { User } from "src/domain/entities/user.entity";
 import * as bcrypt from 'bcrypt';
-import { UserRepositoryImpl } from "src/infrastructure/persistence/repositories/user.repository.impl";
-import { CustomerRepositoryImpl } from '../../../infrastructure/persistence/repositories/customer.repository.impl';
 import { Customer } from "src/domain/entities/customer.entity";
+import { IUserRepository } from "src/domain/repositories/iuser.repository";
+import { ICustomerRepository } from "src/domain/repositories/icustomer.repository";
 
 @Injectable()
 export class CreateUserService {
 
-    constructor(private readonly repository: UserRepositoryImpl, private readonly customerRepository: CustomerRepositoryImpl) { }
+    constructor(@Inject('UserRepository') readonly repository: IUserRepository, @Inject('CustomerRepository') private readonly customerRepository: ICustomerRepository) { }
 
     async execute(user: User): Promise<User> {
         const emailInUse = await this.repository.findByEmail(user.email);
